@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/source-sans-pro-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('fonts/raleway-extra-bold.ttf') format('truetype');
+}

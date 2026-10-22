@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+config.local.php
+node_modules/
+/vendor/
+*.log
+*.zip
+consultas.jsonl
+.impeccable/review/
+.DS_Store
+Thumbs.db
