@@ -82,11 +82,16 @@ function handle_contact(array $post, array &$session): array
     @chmod($directory . '/consultas.jsonl', 0600);
     $session['contact_last_sent'] = time();
 
-    $sent = send_contact_mail($values, $config);
+    $mailResult = send_contact_mail($values, $config);
     $result['status'] = 'success';
-    $result['message'] = $sent
-        ? 'Tu consulta se guardó y se envió por correo.'
-        : 'Tu consulta se guardó en este sitio. El envío de correo no está disponible; para contacto directo escribe a info@pontelog.com.';
+    if ($mailResult['ok']) {
+        $result['message'] = 'Tu consulta se guardó y se envió por correo.';
+    } else {
+        $result['message'] = 'Tu consulta se guardó en este sitio. El envío de correo no está disponible; para contacto directo escribe a info@pontelog.com.';
+        if (!empty($config['mail_debug']) && $mailResult['error'] !== '') {
+            $result['message'] .= ' [DEBUG correo: ' . $mailResult['error'] . ']';
+        }
+    }
     $result['values'] = ['name' => '', 'email' => '', 'phone' => '', 'message' => '', 'newsletter' => false];
     return $result;
 }

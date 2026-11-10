@@ -23,6 +23,7 @@ function pontelog_config(): array
         'smtp_user' => '',
         'smtp_pass' => '',
         'smtp_secure' => 'tls', // tls | ssl | ''
+        'mail_debug' => false, // true = muestra el error SMTP en el formulario
         'data_dir' => '',
     ];
 
@@ -48,6 +49,7 @@ function pontelog_config(): array
         'PONTELOG_SMTP_USER' => 'smtp_user',
         'PONTELOG_SMTP_PASS' => 'smtp_pass',
         'PONTELOG_SMTP_SECURE' => 'smtp_secure',
+        'PONTELOG_MAIL_DEBUG' => 'mail_debug',
         'PONTELOG_DATA_DIR' => 'data_dir',
     ];
 
@@ -56,7 +58,7 @@ function pontelog_config(): array
         if ($value === false || $value === '') {
             continue;
         }
-        if ($key === 'mail_enabled') {
+        if ($key === 'mail_enabled' || $key === 'mail_debug') {
             $config[$key] = $value === '1' || strcasecmp($value, 'true') === 0;
         } elseif ($key === 'smtp_port') {
             $config[$key] = (int) $value;

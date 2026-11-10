@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
 require_once dirname(__DIR__) . '/lib/PHPMailer/src/Exception.php';
 require_once dirname(__DIR__) . '/lib/PHPMailer/src/PHPMailer.php';
@@ -10,27 +11,34 @@ require_once dirname(__DIR__) . '/lib/PHPMailer/src/SMTP.php';
 
 /**
  * Envía la consulta de contacto por SMTP con PHPMailer (HTML + texto).
- * Devuelve true solo si el servidor SMTP aceptó el mensaje.
  *
  * @param array{name:string,email:string,phone:string,message:string,newsletter:bool} $values
+ * @return array{ok:bool,error:string}
  */
-function send_contact_mail(array $values, array $config): bool
+function send_contact_mail(array $values, array $config): array
 {
     if (empty($config['mail_enabled'])) {
-        return false;
+        return ['ok' => false, 'error' => 'mail_enabled está en false o no está definido en config.local.php'];
     }
 
     $recipient = $config['contact_email'] ?? '';
     if (!is_string($recipient) || !filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
-        return false;
+        return ['ok' => false, 'error' => 'contact_email no es un correo válido'];
     }
 
     $host = trim((string) ($config['smtp_host'] ?? ''));
     if ($host === '') {
-        return false;
+        return ['ok' => false, 'error' => 'smtp_host está vacío'];
+    }
+
+    $user = trim((string) ($config['smtp_user'] ?? ''));
+    $pass = (string) ($config['smtp_pass'] ?? '');
+    if ($user === '' || $pass === '' || $pass === 'TU_CLAVE_SMTP') {
+        return ['ok' => false, 'error' => 'smtp_user o smtp_pass están vacíos o sin configurar'];
     }
 
     $mail = new PHPMailer(true);
+    $smtpTrace = '';
 
     try {
         $mail->CharSet = 'UTF-8';
@@ -38,8 +46,16 @@ function send_contact_mail(array $values, array $config): bool
         $mail->Host = $host;
         $mail->Port = (int) ($config['smtp_port'] ?? 587);
         $mail->SMTPAuth = true;
-        $mail->Username = (string) ($config['smtp_user'] ?? '');
-        $mail->Password = (string) ($config['smtp_pass'] ?? '');
+        $mail->Username = $user;
+        $mail->Password = $pass;
+        $mail->Timeout = 20;
+
+        if (!empty($config['mail_debug'])) {
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->Debugoutput = static function (string $str, int $level) use (&$smtpTrace): void {
+                $smtpTrace .= trim($str) . "\n";
+            };
+        }
 
         $secure = strtolower(trim((string) ($config['smtp_secure'] ?? 'tls')));
         if ($secure === 'tls') {
@@ -68,11 +84,30 @@ function send_contact_mail(array $values, array $config): bool
         $mail->Body = build_contact_mail_html($values, $newsletter);
         $mail->AltBody = build_contact_mail_text($values, $newsletter);
 
-        return $mail->send();
+        $mail->send();
+        return ['ok' => true, 'error' => ''];
     } catch (MailException $e) {
-        error_log('Pontelog mail error: ' . $mail->ErrorInfo);
-        return false;
+        $error = trim($mail->ErrorInfo !== '' ? $mail->ErrorInfo : $e->getMessage());
+        if ($smtpTrace !== '') {
+            $error .= "\n--- traza SMTP ---\n" . trim($smtpTrace);
+        }
+        error_log('Pontelog mail error: ' . $error);
+        log_mail_error($config, $error);
+        return ['ok' => false, 'error' => $error];
     }
+}
+
+function log_mail_error(array $config, string $error): void
+{
+    $directory = trim((string) ($config['data_dir'] ?? ''));
+    if ($directory === '') {
+        $directory = dirname(__DIR__, 2) . '/pontelog-data';
+    }
+    if (!is_dir($directory) && !@mkdir($directory, 0700, true) && !is_dir($directory)) {
+        return;
+    }
+    $line = '[' . gmdate('c') . '] ' . str_replace(["\r", "\n"], ['', ' | '], $error) . PHP_EOL;
+    @file_put_contents(rtrim($directory, '/\\') . '/mail-errors.log', $line, FILE_APPEND | LOCK_EX);
 }
 
 /** @return list<string> */

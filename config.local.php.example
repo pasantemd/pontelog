@@ -27,5 +27,6 @@ return [
     'smtp_user' => 'info@pontelog.com',
     'smtp_pass' => 'TU_CLAVE_SMTP',
     'smtp_secure' => 'tls', // tls | ssl | '' (sin cifrado)
+    'mail_debug' => true, // pon false cuando el correo ya funcione
     'data_dir' => '/home/TU_USUARIO/pontelog-data',
 ];
