@@ -125,22 +125,24 @@
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom:18
           }).addTo(coverage);
+          const points = L.layerGroup().addTo(coverage);
           markers.forEach(point => {
             const label = String(point.name || '').replace(/:\s*$/, '').trim();
             L.circleMarker([point.lat, point.lng], {
-              radius: 5,
+              radius: 6,
               color: '#111111',
               weight: 2,
               fillColor: '#111111',
-              fillOpacity: 0.8,
-            }).addTo(coverage).bindTooltip(label, {
+              fillOpacity: 1,
+              opacity: 1,
+            }).bindTooltip(label, {
               direction: 'top',
               opacity: 1,
               sticky: true,
-              offset: [0, -6],
-            });
+              offset: [0, -8],
+            }).addTo(points);
           });
-          coverage.invalidateSize();
+          requestAnimationFrame(() => coverage.invalidateSize());
         } catch { unavailable(); }
       };
       document.head.append(script);
