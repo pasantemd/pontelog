@@ -10,3 +10,5 @@ Require all denied
 <Files "config.local.php">
 Require all denied
 </Files>
+AddType application/json .json
+AddType application/geo+json .geojson

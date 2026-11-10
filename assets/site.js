@@ -1,5 +1,7 @@
 (() => {
-  const base = new URL('../', document.currentScript.src);
+  const scriptEl = document.currentScript || document.querySelector('script[src*="assets/site.js"]');
+  const base = new URL('../', (scriptEl && scriptEl.src) || window.location.href);
+  const asset = (path) => new URL(path, base).href;
   const menu = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#main-nav');
   const header = document.querySelector('.site-header');
@@ -113,35 +115,72 @@
       map.classList.add('map-unavailable');
       map.textContent = 'El mapa no está disponible en este momento.';
     };
-    map.textContent = 'Cargando mapa…';
-    const root = new URL('assets/vendor/leaflet/', base);
-    const css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = new URL('leaflet.css', root);
-    const cssReady = new Promise((resolve, reject) => { css.onload = resolve; css.onerror = reject; });
-    document.head.append(css);
-    const script = document.createElement('script');
-    script.src = new URL('leaflet.js', root);
-    script.onerror = unavailable;
-    script.onload = async () => {
+
+    const loadLeaflet = () => new Promise((resolve, reject) => {
+      if (window.L) {
+        resolve(window.L);
+        return;
+      }
+      if (!document.querySelector('link[data-pontelog-leaflet]')) {
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = asset('assets/vendor/leaflet/leaflet.css');
+        css.setAttribute('data-pontelog-leaflet', '1');
+        document.head.append(css);
+      }
+      const script = document.createElement('script');
+      script.src = asset('assets/vendor/leaflet/leaflet.js');
+      script.onload = () => (window.L ? resolve(window.L) : reject(new Error('leaflet-missing')));
+      script.onerror = () => reject(new Error('leaflet-load'));
+      document.head.append(script);
+    });
+
+    const addMarkers = (L, coverage, markers) => {
+      markers.forEach(point => {
+        const label = String(point.name || '').replace(/:\s*$/, '').trim();
+        L.circleMarker([point.lat, point.lng], {
+          radius: 5,
+          color: '#111111',
+          weight: 0,
+          fillColor: '#111111',
+          fillOpacity: 1,
+          opacity: 1,
+        }).bindTooltip(label, {
+          direction: 'top',
+          opacity: 1,
+          sticky: true,
+          offset: [0, -8],
+        }).addTo(coverage);
+      });
+    };
+
+    const renderMap = async () => {
+      map.textContent = 'Cargando mapa…';
+      const L = await loadLeaflet();
+      const markersRes = await fetch(asset('assets/map-markers.json'), { cache: 'no-cache' });
+      if (!markersRes.ok) throw new Error('markers');
+      const markers = await markersRes.json();
+
+      let americas = null;
       try {
-        await cssReady;
-        const [markersRes, geoRes] = await Promise.all([
-          fetch(new URL('assets/map-markers.json', base)),
-          fetch(new URL('assets/americas.geojson', base)),
-        ]);
-        if (!markersRes.ok || !geoRes.ok) throw new Error('map-data');
-        const markers = await markersRes.json();
-        const americas = await geoRes.json();
-        map.textContent = '';
+        const geoRes = await fetch(asset('assets/americas.json'), { cache: 'no-cache' });
+        if (geoRes.ok) americas = await geoRes.json();
+      } catch (_) {
+        americas = null;
+      }
 
-        const coverage = L.map(map, {
-          scrollWheelZoom: false,
-          attributionControl: false,
-          maxBounds: [[-60, -140], [75, -20]],
-          maxBoundsViscosity: 0.85,
-        });
+      map.textContent = '';
+      map.classList.remove('map-unavailable');
 
+      const coverage = L.map(map, {
+        scrollWheelZoom: false,
+        attributionControl: false,
+        maxBounds: [[-60, -140], [75, -20]],
+        maxBoundsViscosity: 0.85,
+      }).setView([5, -78], 3);
+
+      let countries = null;
+      if (americas && americas.features) {
         const baseStyle = {
           color: '#ffffff',
           weight: 1.1,
@@ -155,7 +194,6 @@
           fillColor: '#bcbcbc',
           fillOpacity: 1,
         };
-
         const nameMap = {
           Canada: 'CANADÁ',
           'United States of America': 'ESTADOS UNIDOS',
@@ -175,11 +213,10 @@
           Argentina: 'ARGENTINA',
           Uruguay: 'URUGUAY',
         };
-
-        const countries = L.geoJSON(americas, {
+        countries = L.geoJSON(americas, {
           style: baseStyle,
           onEachFeature: (feature, layer) => {
-            const raw = feature.properties?.name || '';
+            const raw = (feature.properties && feature.properties.name) || '';
             const label = nameMap[raw] || String(raw).toUpperCase();
             layer.bindTooltip(label, {
               sticky: true,
@@ -193,31 +230,21 @@
             });
           },
         }).addTo(coverage);
-
-        markers.forEach(point => {
-          const label = String(point.name || '').replace(/:\s*$/, '').trim();
-          L.circleMarker([point.lat, point.lng], {
-            radius: 5,
-            color: '#111111',
-            weight: 0,
-            fillColor: '#111111',
-            fillOpacity: 1,
-            opacity: 1,
-          }).bindTooltip(label, {
-            direction: 'top',
-            opacity: 1,
-            sticky: true,
-            offset: [0, -8],
-          }).addTo(coverage);
-        });
-
-        coverage.fitBounds(countries.getBounds().pad(0.04), { animate: false });
-        requestAnimationFrame(() => coverage.invalidateSize());
-      } catch {
-        unavailable();
       }
+
+      addMarkers(L, coverage, markers);
+
+      if (countries && countries.getBounds().isValid()) {
+        coverage.fitBounds(countries.getBounds().pad(0.04), { animate: false });
+      } else if (markers.length) {
+        coverage.fitBounds(L.latLngBounds(markers.map(p => [p.lat, p.lng])).pad(0.2), { animate: false });
+      }
+
+      requestAnimationFrame(() => coverage.invalidateSize());
+      setTimeout(() => coverage.invalidateSize(), 250);
     };
-    document.head.append(script);
+
+    renderMap().catch(() => unavailable());
   }
 
   const banner = document.querySelector('#cookie-banner');

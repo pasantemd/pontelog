@@ -9,9 +9,9 @@
   <meta name="description" content="<?= e(t('meta.description')) ?>">
   <link rel="icon" href="<?= asset('cropped-cropped-Logo-PONTE-32x32.png') ?>">
   <link rel="stylesheet" href="<?= $base ?>assets/fonts.css">
-  <link rel="stylesheet" href="<?= $base ?>assets/site.css?v=12">
+  <link rel="stylesheet" href="<?= $base ?>assets/site.css?v=13">
   <?php if (!$home): ?><link rel="stylesheet" href="<?= $base ?>assets/forms.css?v=4"><?php endif; ?>
-  <script src="<?= $base ?>assets/site.js?v=11" defer></script>
+  <script src="<?= $base ?>assets/site.js?v=12" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido"><?= e(t('skip')) ?></a>
