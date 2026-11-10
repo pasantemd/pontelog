@@ -107,4 +107,4 @@ Hay un banner de consentimiento (aceptar / solo necesarias). El texto es una pla
 
 Los formularios de campaña y webinar mantienen el destino HTTPS original en `mkt.apracom-ec.com`. Las cantidades aparecen al seleccionar una placa y «Describa» al elegir «Otros». Las fechas de las campañas se conservan como fueron publicadas; no representan disponibilidad actual verificada.
 
-Leaflet se sirve localmente; las teselas de OpenStreetMap necesitan Internet. El mapa está visible junto al formulario y conserva una lista alternativa de países, sin afirmar oficinas ni cobertura comercial.
+El mapa de contacto es propio (GeoJSON de América + Leaflet local): países en gris, puntos negros y nombre al pasar el cursor. No usa teselas de OpenStreetMap.

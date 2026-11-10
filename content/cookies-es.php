@@ -16,7 +16,7 @@ return [
         [
             'heading' => '2. Mapa de contacto',
             'body' => [
-                'Al mostrar el mapa de la sección de contacto, el navegador pide imágenes de mapa a OpenStreetMap. Eso puede dejar registros técnicos en ese servicio (por ejemplo dirección IP y recurso pedido). No es una cookie creada por Pontelog.',
+                'El mapa de contacto se carga desde archivos del propio sitio (mapa vectorial e indicadores). No usa cookies adicionales de terceros para mostrarlo.',
             ],
         ],
         [

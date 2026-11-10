@@ -16,7 +16,7 @@ return [
         [
             'heading' => '2. Contact map',
             'body' => [
-                'When the contact-section map is shown, the browser requests map images from OpenStreetMap. That service may keep technical logs (for example IP address and requested resource). These are not cookies created by Pontelog.',
+                'The contact map loads from this site’s own files (vector map and markers). It does not use extra third-party cookies to display.',
             ],
         ],
         [

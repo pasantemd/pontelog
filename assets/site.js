@@ -102,50 +102,113 @@
   if (map) {
     const unavailable = () => {
       map.classList.add('map-unavailable');
-      map.textContent = 'El mapa no está disponible. Consulta los países en la lista inferior.';
+      map.textContent = 'El mapa no está disponible en este momento.';
     };
-      map.textContent = 'Cargando mapa…';
-      const root = new URL('assets/vendor/leaflet/', base);
-      const css = document.createElement('link');
-      css.rel = 'stylesheet';
-      css.href = new URL('leaflet.css', root);
-      const cssReady = new Promise((resolve, reject) => { css.onload = resolve; css.onerror = reject; });
-      document.head.append(css);
-      const script = document.createElement('script');
-      script.src = new URL('leaflet.js', root);
-      script.onerror = unavailable;
-      script.onload = async () => {
-        try {
-          await cssReady;
-          const response = await fetch(new URL('assets/map-markers.json', base));
-          if (!response.ok) throw new Error('map-data');
-          const markers = await response.json();
-          map.textContent = '';
-          const coverage = L.map(map, {scrollWheelZoom:false}).setView([12, -82], 2);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom:18
-          }).addTo(coverage);
-          const points = L.layerGroup().addTo(coverage);
-          markers.forEach(point => {
-            const label = String(point.name || '').replace(/:\s*$/, '').trim();
-            L.circleMarker([point.lat, point.lng], {
-              radius: 6,
-              color: '#111111',
-              weight: 2,
-              fillColor: '#111111',
-              fillOpacity: 1,
-              opacity: 1,
-            }).bindTooltip(label, {
+    map.textContent = 'Cargando mapa…';
+    const root = new URL('assets/vendor/leaflet/', base);
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = new URL('leaflet.css', root);
+    const cssReady = new Promise((resolve, reject) => { css.onload = resolve; css.onerror = reject; });
+    document.head.append(css);
+    const script = document.createElement('script');
+    script.src = new URL('leaflet.js', root);
+    script.onerror = unavailable;
+    script.onload = async () => {
+      try {
+        await cssReady;
+        const [markersRes, geoRes] = await Promise.all([
+          fetch(new URL('assets/map-markers.json', base)),
+          fetch(new URL('assets/americas.geojson', base)),
+        ]);
+        if (!markersRes.ok || !geoRes.ok) throw new Error('map-data');
+        const markers = await markersRes.json();
+        const americas = await geoRes.json();
+        map.textContent = '';
+
+        const coverage = L.map(map, {
+          scrollWheelZoom: false,
+          attributionControl: false,
+          maxBounds: [[-60, -140], [75, -20]],
+          maxBoundsViscosity: 0.85,
+        });
+
+        const baseStyle = {
+          color: '#ffffff',
+          weight: 1.1,
+          opacity: 1,
+          fillColor: '#d7d7d7',
+          fillOpacity: 1,
+        };
+        const hoverStyle = {
+          color: '#ffffff',
+          weight: 1.4,
+          fillColor: '#bcbcbc',
+          fillOpacity: 1,
+        };
+
+        const nameMap = {
+          Canada: 'CANADÁ',
+          'United States of America': 'ESTADOS UNIDOS',
+          Mexico: 'MÉXICO',
+          Guatemala: 'GUATEMALA',
+          Honduras: 'HONDURAS',
+          Nicaragua: 'NICARAGUA',
+          'Dominican Rep.': 'REPÚBLICA DOMINICANA',
+          Colombia: 'COLOMBIA',
+          Venezuela: 'VENEZUELA',
+          Ecuador: 'ECUADOR',
+          Peru: 'PERÚ',
+          Brazil: 'BRASIL',
+          Bolivia: 'BOLIVIA',
+          Paraguay: 'PARAGUAY',
+          Chile: 'CHILE',
+          Argentina: 'ARGENTINA',
+          Uruguay: 'URUGUAY',
+        };
+
+        const countries = L.geoJSON(americas, {
+          style: baseStyle,
+          onEachFeature: (feature, layer) => {
+            const raw = feature.properties?.name || '';
+            const label = nameMap[raw] || String(raw).toUpperCase();
+            layer.bindTooltip(label, {
+              sticky: true,
               direction: 'top',
               opacity: 1,
-              sticky: true,
-              offset: [0, -8],
-            }).addTo(points);
-          });
-          requestAnimationFrame(() => coverage.invalidateSize());
-        } catch { unavailable(); }
-      };
-      document.head.append(script);
+              offset: [0, -6],
+            });
+            layer.on({
+              mouseover: () => layer.setStyle(hoverStyle),
+              mouseout: () => countries.resetStyle(layer),
+            });
+          },
+        }).addTo(coverage);
+
+        markers.forEach(point => {
+          const label = String(point.name || '').replace(/:\s*$/, '').trim();
+          L.circleMarker([point.lat, point.lng], {
+            radius: 5,
+            color: '#111111',
+            weight: 0,
+            fillColor: '#111111',
+            fillOpacity: 1,
+            opacity: 1,
+          }).bindTooltip(label, {
+            direction: 'top',
+            opacity: 1,
+            sticky: true,
+            offset: [0, -8],
+          }).addTo(coverage);
+        });
+
+        coverage.fitBounds(countries.getBounds().pad(0.04), { animate: false });
+        requestAnimationFrame(() => coverage.invalidateSize());
+      } catch {
+        unavailable();
+      }
+    };
+    document.head.append(script);
   }
 
   const banner = document.querySelector('#cookie-banner');
