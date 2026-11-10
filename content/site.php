@@ -10,7 +10,7 @@ return [
         ['id' => 'prognosis', 'name' => 'Prognosis', 'image' => 'Prognosis.jpg', 'text' => 'Kits ELISA y Lateral Flow para la detección de micotoxinas (Aflatoxina, DON, Zearalenona, Ochratoxina, Fumonisina, T2-HT2) e Histamina.'],
         ['id' => 'condalab', 'name' => 'Condalab', 'image' => 'condalab.jpg', 'text' => 'Los medios de cultivo deshidratados poseen una gran variedad de aplicaciones, tanto en microbiología industrial'],
         ['id' => 'world-bioproducts', 'name' => 'World Bioproducts', 'image' => 'Wolrdbioproducts.jpg', 'text' => 'Hisopos y esponjas para muestreo ambiental; Diluciones y enriquecimientos'],
-        ['id' => 'whirl-pak', 'name' => 'Whirl-Pak', 'image' => 'Whirl-Pak-.jpg', 'text' => 'Fundas estériles para la recolección y procesamiento de muestras.'],
+        ['id' => 'whirl-pak', 'name' => 'Riverlabs', 'image' => 'riverlabs.webp', 'text' => 'Fundas estériles para la recolección y procesamiento de muestras.'],
         ['id' => 'hygiena', 'name' => 'Hygiena', 'image' => 'hygiena.jpg', 'text' => 'Kits ELISA y Lateral Flow para la detección de alérgenos, Kits ATP para monitoreo ambiental, Kits ATP para productos terminados, Kits PCR para la detección de patógenos'],
         ['id' => 'biotecon', 'name' => 'Biotecon', 'image' => 'BIOTECONS.jpg', 'text' => 'Kits PCR para la detección de patógenos.'],
         ['id' => 'unisensor', 'name' => 'Unisensor', 'image' => 'unisensor.png.jpg', 'text' => 'Kits Lateral Flow para la detección de antibióticos en leche.'],
