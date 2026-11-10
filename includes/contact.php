@@ -26,44 +26,43 @@ function handle_contact(array $post, array &$session): array
         return $result;
     }
     if (!is_string($post['csrf'] ?? null) || !hash_equals(csrf_token($session), $post['csrf'])) {
-        $result['message'] = 'La sesión del formulario caducó. Recarga la página e inténtalo de nuevo.';
+        $result['message'] = t('msg.csrf');
         return $result;
     }
     if (!is_string($post['website'] ?? '') || ($post['website'] ?? '') !== '') {
-        $result['message'] = 'No se pudo registrar la consulta. Inténtalo de nuevo.';
+        $result['message'] = t('msg.bot');
         return $result;
     }
     if (time() - (int) ($session['contact_last_sent'] ?? 0) < 30) {
-        $result['message'] = 'Espera 30 segundos antes de enviar otra consulta.';
+        $result['message'] = t('msg.rate');
         return $result;
     }
     if ($values['name'] === '' || strlen($values['name']) > 200) {
-        $result['errors']['name'] = 'Escribe tu nombre o empresa (máximo 200 caracteres).';
+        $result['errors']['name'] = t('msg.name');
     }
     if (strlen($values['email']) > 254 || !filter_var($values['email'], FILTER_VALIDATE_EMAIL)) {
-        $result['errors']['email'] = 'Escribe un correo electrónico válido.';
+        $result['errors']['email'] = t('msg.email');
     }
     if (!preg_match('/^[+()0-9 .-]{7,30}$/D', $values['phone'])) {
-        $result['errors']['phone'] = 'Escribe un teléfono válido de 7 a 30 caracteres.';
+        $result['errors']['phone'] = t('msg.phone');
     }
     if (strlen($values['message']) > 5000) {
-        $result['errors']['message'] = 'El mensaje no puede superar los 5000 caracteres.';
+        $result['errors']['message'] = t('msg.message');
     }
     if (isset($post['newsletter']) && !in_array($post['newsletter'], ['0', '1'], true)) {
-        $result['errors']['newsletter'] = 'Selecciona una opción válida para el boletín.';
+        $result['errors']['newsletter'] = t('msg.newsletter');
     }
     if ($result['errors']) {
-        $result['message'] = 'Revisa los campos indicados antes de enviar.';
+        $result['message'] = t('msg.review');
         return $result;
     }
 
     $config = pontelog_config();
-    // Por defecto: carpeta hermana al sitio (fuera del document root en hosting típico).
     $directory = $config['data_dir'] !== ''
         ? (string) $config['data_dir']
         : dirname(__DIR__, 2) . '/pontelog-data';
     if (!is_dir($directory) && !@mkdir($directory, 0700, true) && !is_dir($directory)) {
-        $result['message'] = 'No se pudo guardar la consulta. Escríbenos a info@pontelog.com.';
+        $result['message'] = t('msg.save_fail');
         return $result;
     }
     $directory = realpath($directory);
@@ -71,13 +70,13 @@ function handle_contact(array $post, array &$session): array
     $normalizedDirectory = strtolower(str_replace('\\', '/', (string) $directory)) . '/';
     $normalizedWebroot = strtolower(str_replace('\\', '/', (string) $webroot)) . '/';
     if (!$directory || ($webroot && str_starts_with($normalizedDirectory, $normalizedWebroot))) {
-        $result['message'] = 'El formulario necesita configurar un directorio privado. Escríbenos a info@pontelog.com.';
+        $result['message'] = t('msg.data_dir');
         return $result;
     }
     $record = ['id' => bin2hex(random_bytes(12)), 'created_at' => gmdate('c')] + $values;
     $line = json_encode($record, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE) . PHP_EOL;
     if (@file_put_contents($directory . '/consultas.jsonl', $line, FILE_APPEND | LOCK_EX) !== strlen($line)) {
-        $result['message'] = 'No se pudo guardar la consulta. Escríbenos a info@pontelog.com.';
+        $result['message'] = t('msg.save_fail');
         return $result;
     }
     @chmod($directory . '/consultas.jsonl', 0600);
@@ -87,16 +86,16 @@ function handle_contact(array $post, array &$session): array
     $mauticResult = subscribe_mautic_newsletter($values, $config);
     $result['status'] = 'success';
     if ($mailResult['ok']) {
-        $result['message'] = 'Tu consulta se guardó y se envió por correo.';
+        $result['message'] = t('msg.mail_ok');
     } else {
-        $result['message'] = 'Tu consulta se guardó en este sitio. El envío de correo no está disponible; para contacto directo escribe a info@pontelog.com.';
+        $result['message'] = t('msg.mail_saved');
         if (!empty($config['mail_debug']) && $mailResult['error'] !== '') {
             $result['message'] .= ' [DEBUG correo: ' . $mailResult['error'] . ']';
         }
     }
     if ($values['newsletter']) {
         if ($mauticResult['ok'] && !$mauticResult['skipped']) {
-            $result['message'] .= ' También registramos tu suscripción al boletín.';
+            $result['message'] .= t('msg.newsletter_ok');
         } elseif (!$mauticResult['skipped'] || $mauticResult['error'] !== '') {
             if (!empty($config['mail_debug']) && $mauticResult['error'] !== '') {
                 $result['message'] .= ' [DEBUG boletín: ' . $mauticResult['error'] . ']';

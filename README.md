@@ -78,6 +78,19 @@ Si el visitante marca el boletín, el sitio envía esos datos a un formulario pu
 
 Los alias `mautic_*_field` deben coincidir con los alias de campos del formulario en Mautic. Errores en `/home/.../pontelog-data/mautic-errors.log`.
 
+### Idiomas
+
+El sitio está en **español, inglés, portugués y chino**.
+
+Detección (en este orden):
+
+1. `?lang=es|en|pt|zh` (selector manual en la cabecera; se guarda en cookie `pontelog_lang`)
+2. Cookie guardada
+3. Cabecera `Accept-Language` del navegador (idioma/región preferidos del usuario)
+4. Español por defecto
+
+No usamos geolocalización por IP: el idioma del navegador refleja mejor cómo habla la persona y evita VPN/viajes incorrectos. El usuario siempre puede cambiar el idioma a mano.
+
 ### Privacidad y cookies
 
 Rutas:

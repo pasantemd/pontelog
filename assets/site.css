@@ -46,6 +46,10 @@ input::placeholder, textarea::placeholder { color: #555; opacity: 1; }
 #main-nav > a:not(.button) { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink); font-size: 18px; text-decoration: none; }
 #main-nav .nav-contact { font-size: 16px; }
 #main-nav > a:not(.button):hover { color: var(--blue); }
+.lang-switch { display: inline-flex; align-items: center; gap: 8px; padding: 4px 0; }
+.lang-switch a { display: inline-flex; align-items: center; min-height: 36px; color: #666; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; }
+.lang-switch a:hover, .lang-switch a.is-active { color: #111; }
+.lang-switch a.is-active { text-decoration: underline; text-underline-offset: 4px; }
 .button { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; justify-content: center; align-items: center; gap: 14px; max-width: 100%; min-width: 0; min-height: 56px; padding: 15px 24px; border: 1px solid transparent; border-radius: 3px; background: var(--blue); color: #fff; font-size: 15px; font-weight: 700; line-height: 1.4; text-align: center; text-decoration: none; transition: background-color 160ms ease-out, transform 160ms ease-out; }
 .button:hover { background: var(--blue-hover); }
 .button:active { transform: translateY(1px); }
@@ -214,6 +218,7 @@ input::placeholder, textarea::placeholder { color: #555; opacity: 1; }
   #main-nav { display: none; flex: 0 0 100%; align-items: stretch; padding: 0 0 22px; gap: 0; }
   #main-nav.is-open { display: flex; flex-direction: column; }
   #main-nav > a:not(.button) { min-height: 48px; border-bottom: 1px solid var(--line); }
+  #main-nav .lang-switch { flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid var(--line); }
   #main-nav .nav-contact { align-self: flex-start; margin-top: 18px; }
   .hero { padding-block: 46px; }
   .hero-layout { grid-template-columns: minmax(0, 1fr); gap: 34px; }

@@ -1,12 +1,17 @@
+<?php
+$cookieParts = explode(':privacy', t('cookie.text'), 2);
+$afterPrivacy = $cookieParts[1] ?? '';
+$cookieTail = explode(':cookies', $afterPrivacy, 2);
+?>
 <div id="cookie-banner" class="cookie-banner" hidden>
   <div class="cookie-banner-inner">
     <div class="cookie-copy">
-      <p><strong>Cookies y privacidad</strong></p>
-      <p>Usamos cookies necesarias para el sitio y, si las aceptas, cookies de preferencia. Consulta la <a href="<?= $base ?>politica-de-privacidad/">política de privacidad</a> y la <a href="<?= $base ?>politica-de-cookies/">política de cookies</a>.</p>
+      <p><strong><?= e(t('cookie.title')) ?></strong></p>
+      <p><?= e($cookieParts[0]) ?><a href="<?= $base ?>politica-de-privacidad/?lang=<?= e($lang) ?>"><?= e(t('cookie.privacy')) ?></a><?= e($cookieTail[0] ?? '') ?><a href="<?= $base ?>politica-de-cookies/?lang=<?= e($lang) ?>"><?= e(t('cookie.cookies')) ?></a><?= e($cookieTail[1] ?? '') ?></p>
     </div>
     <div class="cookie-actions">
-      <button type="button" class="button button-small" data-cookie-accept>Aceptar</button>
-      <button type="button" class="button button-small button-ghost" data-cookie-reject>Solo necesarias</button>
+      <button type="button" class="button button-small" data-cookie-accept><?= e(t('cookie.accept')) ?></button>
+      <button type="button" class="button button-small button-ghost" data-cookie-reject><?= e(t('cookie.reject')) ?></button>
     </div>
   </div>
 </div>

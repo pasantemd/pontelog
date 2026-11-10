@@ -4,7 +4,7 @@ declare(strict_types=1);
 ?>
 <div class="container standalone legal-page">
   <h1><?= e($legal['title']) ?></h1>
-  <p class="legal-updated">Última actualización: <?= e($legal['updated']) ?></p>
+  <p class="legal-updated"><?= e(t('legal.updated', ['date' => $legal['updated']])) ?></p>
   <?php foreach ($legal['sections'] as $section): ?>
     <section class="legal-section">
       <h2><?= e($section['heading']) ?></h2>
@@ -13,5 +13,5 @@ declare(strict_types=1);
       <?php endforeach; ?>
     </section>
   <?php endforeach; ?>
-  <p><a class="button" href="<?= $base ?>">Volver al inicio</a></p>
+  <p><a class="button" href="<?= $base ?>?lang=<?= e($lang) ?>"><?= e(t('legal.back')) ?></a></p>
 </div>
