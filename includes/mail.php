@@ -67,6 +67,17 @@ function send_contact_mail(array $values, array $config): array
             $mail->SMTPAutoTLS = false;
         }
 
+        // En cPanel/localhost el certificado suele ser interno; sin esto falla el TLS.
+        if (in_array(strtolower($host), ['localhost', '127.0.0.1'], true) || !empty($config['smtp_allow_self_signed'])) {
+            $mail->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true,
+                ],
+            ];
+        }
+
         $from = (string) ($config['mail_from'] ?? $recipient);
         $fromName = (string) ($config['mail_from_name'] ?? 'Pontelog');
         $mail->setFrom($from, $fromName);

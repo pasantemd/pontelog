@@ -5,16 +5,15 @@ declare(strict_types=1);
  * Copia este archivo a config.local.php y completa tus datos SMTP.
  * config.local.php no se sube a git (.gitignore).
  *
- * Dominio: pontelog.com
- * Hosting cPanel típico:
- *   host mail.pontelog.com, puerto 465 + ssl, o 587 + tls
+ * Dominio: pontelog.com (cPanel)
  *
- * Gmail / Google Workspace:
- *   host smtp.gmail.com, puerto 587, secure tls
- *   usa una "Contraseña de aplicación", no la clave normal.
+ * Si aparece "Could not connect to SMTP host", prueba en este orden:
+ * 1) localhost + puerto 587 + tls  (recomendado en el mismo servidor)
+ * 2) localhost + puerto 465 + ssl
+ * 3) mail.pontelog.com + 465 + ssl
+ * 4) mail.pontelog.com + 587 + tls
  *
- * data_dir debe estar FUERA de la carpeta pública del sitio
- * (por ejemplo, un nivel arriba del document root).
+ * data_dir debe estar FUERA de la carpeta pública del sitio.
  */
 return [
     'mail_enabled' => true,
@@ -22,7 +21,7 @@ return [
     'mail_copy' => 'copia@pontelog.com',    // copia visible (CC); varios: 'a@x.com, b@y.com'
     'mail_from' => 'info@pontelog.com',
     'mail_from_name' => 'Pontelog',
-    'smtp_host' => 'mail.pontelog.com',
+    'smtp_host' => 'localhost',
     'smtp_port' => 587,
     'smtp_user' => 'info@pontelog.com',
     'smtp_pass' => 'TU_CLAVE_SMTP',
