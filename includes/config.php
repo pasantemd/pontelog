@@ -27,11 +27,14 @@ function pontelog_config(): array
         'data_dir' => '',
         'mautic_enabled' => false,
         'mautic_base_url' => 'https://mkt.apracom-ec.com',
-        'mautic_form_id' => '',
-        'mautic_form_name' => '',
+        'mautic_client_id' => '',
+        'mautic_client_secret' => '',
+        'mautic_segment_id' => '20',
+        'mautic_form_id' => '14',
+        'mautic_form_name' => 'boletinpontelogweb',
         'mautic_email_field' => 'email',
         'mautic_name_field' => 'nombre',
-        'mautic_phone_field' => '',
+        'mautic_phone_field' => 'telefono',
     ];
 
     $local = [];
@@ -60,6 +63,9 @@ function pontelog_config(): array
         'PONTELOG_DATA_DIR' => 'data_dir',
         'PONTELOG_MAUTIC_ENABLED' => 'mautic_enabled',
         'PONTELOG_MAUTIC_BASE_URL' => 'mautic_base_url',
+        'PONTELOG_MAUTIC_CLIENT_ID' => 'mautic_client_id',
+        'PONTELOG_MAUTIC_CLIENT_SECRET' => 'mautic_client_secret',
+        'PONTELOG_MAUTIC_SEGMENT_ID' => 'mautic_segment_id',
         'PONTELOG_MAUTIC_FORM_ID' => 'mautic_form_id',
         'PONTELOG_MAUTIC_FORM_NAME' => 'mautic_form_name',
         'PONTELOG_MAUTIC_EMAIL_FIELD' => 'mautic_email_field',

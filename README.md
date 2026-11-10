@@ -61,22 +61,27 @@ Si el SMTP no está configurado o falla, la consulta igual se guarda en disco y 
 
 ### Boletín con Mautic
 
-Si el visitante marca el boletín, el sitio envía esos datos a un formulario publicado de Mautic (`/form/submit`).
+Si el visitante marca el boletín, el sitio:
 
-1. En Mautic crea un formulario de suscripción (email obligatorio; nombre/teléfono opcionales).
-2. Publica el formulario y copia su **ID** y alias.
-3. En `config.local.php` activa:
+1. Usa la **API OAuth2** de Mautic (`/oauth/v2/token` + `/api/contacts/new`) y agrega el contacto al segmento **20** (`Boletin Pontelog Web`).
+2. Si la API no está configurada, hace POST al formulario público **ID 14** (`boletinpontelogweb`).
+
+En `config.local.php`:
 
 ```php
 'mautic_enabled' => true,
 'mautic_base_url' => 'https://mkt.apracom-ec.com',
+'mautic_client_id' => 'TU_PUBLIC_KEY',
+'mautic_client_secret' => 'TU_SECRET',
+'mautic_segment_id' => '20',
 'mautic_form_id' => '14',
-'mautic_form_name' => 'boletinpontelog',
+'mautic_form_name' => 'boletinpontelogweb',
 'mautic_email_field' => 'email',
 'mautic_name_field' => 'nombre',
+'mautic_phone_field' => 'telefono',
 ```
 
-Los alias `mautic_*_field` deben coincidir con los alias de campos del formulario en Mautic. Errores en `/home/.../pontelog-data/mautic-errors.log`.
+No subas las claves al repositorio. Errores: `pontelog-data/mautic-errors.log`.
 
 ### Idiomas
 

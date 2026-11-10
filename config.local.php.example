@@ -2,39 +2,38 @@
 declare(strict_types=1);
 
 /**
- * Copia este archivo a config.local.php y completa tus datos SMTP.
+ * Copia este archivo a config.local.php y completa tus datos.
  * config.local.php no se sube a git (.gitignore).
  *
  * Dominio: pontelog.com (cPanel)
  *
- * Si aparece "Could not connect to SMTP host", prueba en este orden:
- * 1) localhost + puerto 587 + tls  (recomendado en el mismo servidor)
- * 2) localhost + puerto 465 + ssl
- * 3) mail.pontelog.com + 465 + ssl
- * 4) mail.pontelog.com + 587 + tls
- *
- * data_dir debe estar FUERA de la carpeta pública del sitio.
+ * SMTP: si falla la conexión prueba localhost:587/tls o localhost:465/ssl.
+ * Mautic: ya existe formulario ID 14 y segmento ID 20 (Boletin Pontelog Web).
  */
 return [
     'mail_enabled' => true,
-    'contact_email' => 'info@pontelog.com', // destinatario principal
-    'mail_copy' => 'copia@pontelog.com',    // copia visible (CC); varios: 'a@x.com, b@y.com'
-    'mail_from' => 'info@pontelog.com',
+    'contact_email' => 'info@pontelog.com',
+    'mail_copy' => 'ctenemaza@apracom-ec.com',
+    'mail_from' => 'web@pontelog.com',
     'mail_from_name' => 'Pontelog',
-    'smtp_host' => 'localhost',
+    'smtp_host' => 'mail.mxcloudmail.com',
     'smtp_port' => 587,
-    'smtp_user' => 'info@pontelog.com',
+    'smtp_user' => 'web@pontelog.com',
     'smtp_pass' => 'TU_CLAVE_SMTP',
-    'smtp_secure' => 'tls', // tls | ssl | '' (sin cifrado)
-    'mail_debug' => true, // pon false cuando el correo ya funcione
-    'data_dir' => '/home/TU_USUARIO/pontelog-data',
+    'smtp_secure' => 'tls',
+    'smtp_allow_self_signed' => true,
+    'mail_debug' => false,
+    'data_dir' => '/home/atvercor/pontelog-data',
 
-    // Boletín → Mautic (crea un formulario de suscripción publicado y pega su ID)
+    // Boletín → Mautic API (preferido) + formulario 14 de respaldo
     'mautic_enabled' => true,
     'mautic_base_url' => 'https://mkt.apracom-ec.com',
-    'mautic_form_id' => 'ID_DEL_FORMULARIO',
-    'mautic_form_name' => 'alias_del_formulario',
+    'mautic_client_id' => 'TU_PUBLIC_KEY_MAUTIC',
+    'mautic_client_secret' => 'TU_SECRET_MAUTIC',
+    'mautic_segment_id' => '20',
+    'mautic_form_id' => '14',
+    'mautic_form_name' => 'boletinpontelogweb',
     'mautic_email_field' => 'email',
     'mautic_name_field' => 'nombre',
-    'mautic_phone_field' => '', // opcional, alias del campo teléfono en Mautic
+    'mautic_phone_field' => 'telefono',
 ];
