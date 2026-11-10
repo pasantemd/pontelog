@@ -55,6 +55,11 @@ function send_contact_mail(array $values, array $config): bool
         $fromName = (string) ($config['mail_from_name'] ?? 'Pontelog');
         $mail->setFrom($from, $fromName);
         $mail->addAddress($recipient);
+        foreach (parse_mail_copy_list($config['mail_copy'] ?? '') as $copy) {
+            if (strcasecmp($copy, $recipient) !== 0) {
+                $mail->addBCC($copy);
+            }
+        }
         $mail->addReplyTo($values['email'], $values['name']);
 
         $newsletter = !empty($values['newsletter']) ? 'Sí' : 'No';
@@ -68,6 +73,30 @@ function send_contact_mail(array $values, array $config): bool
         error_log('Pontelog mail error: ' . $mail->ErrorInfo);
         return false;
     }
+}
+
+/** @return list<string> */
+function parse_mail_copy_list(mixed $copy): array
+{
+    if (is_array($copy)) {
+        $parts = $copy;
+    } elseif (is_string($copy) && $copy !== '') {
+        $parts = preg_split('/[\s,;]+/', $copy) ?: [];
+    } else {
+        return [];
+    }
+
+    $emails = [];
+    foreach ($parts as $part) {
+        if (!is_string($part)) {
+            continue;
+        }
+        $email = trim($part);
+        if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emails[$email] = $email;
+        }
+    }
+    return array_values($emails);
 }
 
 /**

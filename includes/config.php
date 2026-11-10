@@ -15,6 +15,7 @@ function pontelog_config(): array
     $defaults = [
         'mail_enabled' => false,
         'contact_email' => 'info@pontelog.com',
+        'mail_copy' => '', // copia oculta (BCC), uno o varios separados por coma
         'mail_from' => '',
         'mail_from_name' => 'Pontelog',
         'smtp_host' => '',
@@ -39,6 +40,7 @@ function pontelog_config(): array
     $envMap = [
         'PONTELOG_MAIL_ENABLED' => 'mail_enabled',
         'PONTELOG_CONTACT_EMAIL' => 'contact_email',
+        'PONTELOG_MAIL_COPY' => 'mail_copy',
         'PONTELOG_MAIL_FROM' => 'mail_from',
         'PONTELOG_MAIL_FROM_NAME' => 'mail_from_name',
         'PONTELOG_SMTP_HOST' => 'smtp_host',

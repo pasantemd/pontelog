@@ -18,7 +18,8 @@ declare(strict_types=1);
  */
 return [
     'mail_enabled' => true,
-    'contact_email' => 'info@pontelog.com',
+    'contact_email' => 'info@pontelog.com', // destinatario principal
+    'mail_copy' => 'copia@pontelog.com',    // copia oculta (BCC); varios: 'a@x.com, b@y.com'
     'mail_from' => 'info@pontelog.com',
     'mail_from_name' => 'Pontelog',
     'smtp_host' => 'mail.pontelog.com',

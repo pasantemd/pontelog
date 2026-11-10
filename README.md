@@ -41,6 +41,7 @@ Ejemplo mínimo en `config.local.php`:
 return [
     'mail_enabled' => true,
     'contact_email' => 'info@pontelog.com',
+    'mail_copy' => 'copia@pontelog.com',
     'mail_from' => 'info@pontelog.com',
     'mail_from_name' => 'Pontelog',
     'smtp_host' => 'mail.pontelog.com',
@@ -52,7 +53,9 @@ return [
 ];
 ```
 
-También puedes usar variables de entorno (`PONTELOG_MAIL_ENABLED`, `PONTELOG_SMTP_HOST`, `PONTELOG_SMTP_PORT`, `PONTELOG_SMTP_USER`, `PONTELOG_SMTP_PASS`, `PONTELOG_SMTP_SECURE`, `PONTELOG_CONTACT_EMAIL`, `PONTELOG_MAIL_FROM`, `PONTELOG_DATA_DIR`). Las variables de entorno tienen prioridad sobre `config.local.php`.
+`contact_email` recibe el correo; `mail_copy` manda una copia oculta (BCC) a uno o varios correos separados por coma.
+
+También puedes usar variables de entorno (`PONTELOG_MAIL_ENABLED`, `PONTELOG_SMTP_HOST`, `PONTELOG_SMTP_PORT`, `PONTELOG_SMTP_USER`, `PONTELOG_SMTP_PASS`, `PONTELOG_SMTP_SECURE`, `PONTELOG_CONTACT_EMAIL`, `PONTELOG_MAIL_COPY`, `PONTELOG_MAIL_FROM`, `PONTELOG_DATA_DIR`). Las variables de entorno tienen prioridad sobre `config.local.php`.
 
 Si el SMTP no está configurado o falla, la consulta igual se guarda en disco y el mensaje al visitante indica contacto directo a `info@pontelog.com`.
 
