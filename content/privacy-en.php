@@ -16,7 +16,7 @@ return [
             'heading' => '2. Data we process',
             'body' => [
                 'Contact form: name or company, email, phone, message and whether you requested the newsletter.',
-                'Newsletter (if checked): email and, where applicable, name/phone sent to our marketing platform (Mautic).',
+                'Newsletter (if checked): email and, where applicable, name/phone sent to our marketing and email-automation platform.',
                 'Technical data: IP address, date/time, browser type and cookies needed for session security.',
             ],
         ],
@@ -33,7 +33,7 @@ return [
             'heading' => '4. Recipients and processors',
             'body' => [
                 'Hosting and email providers for the site.',
-                'Mautic platform at mkt.apracom-ec.com for newsletter subscriptions when you consent.',
+                'Marketing and email-automation providers that process newsletter subscriptions only when you consent.',
                 'We do not sell your personal data.',
             ],
         ],

@@ -16,7 +16,7 @@ return [
             'heading' => '2. Datos que tratamos',
             'body' => [
                 'Formulario de contacto: nombre o empresa, correo, teléfono, mensaje y si solicitaste el boletín.',
-                'Boletín (si lo marcas): correo y, si aplica, nombre/teléfono enviados a nuestra plataforma de marketing (Mautic).',
+                'Boletín (si lo marcas): correo y, si aplica, nombre/teléfono enviados a nuestra plataforma de marketing y automatización de correo.',
                 'Datos técnicos: dirección IP, fecha/hora, tipo de navegador y cookies necesarias para seguridad de sesión.',
             ],
         ],
@@ -33,7 +33,7 @@ return [
             'heading' => '4. Destinatarios y encargados',
             'body' => [
                 'Proveedor de hosting del sitio y del correo.',
-                'Plataforma Mautic en mkt.apracom-ec.com para suscripciones al boletín cuando das tu consentimiento.',
+                'Proveedores de marketing y automatización de correo que tratan suscripciones al boletín solo cuando das tu consentimiento.',
                 'No vendemos tus datos personales.',
             ],
         ],
