@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/mail.php';
+
 function csrf_token(array &$session): string
 {
     if (!isset($session['contact_csrf']) || !is_string($session['contact_csrf'])) {
@@ -53,7 +56,10 @@ function handle_contact(array $post, array &$session): array
         return $result;
     }
 
-    $directory = getenv('PONTELOG_DATA_DIR') ?: dirname(__DIR__, 3) . '/pontelog-data';
+    $config = pontelog_config();
+    $directory = $config['data_dir'] !== ''
+        ? (string) $config['data_dir']
+        : dirname(__DIR__, 3) . '/pontelog-data';
     if (!is_dir($directory) && !@mkdir($directory, 0700, true) && !is_dir($directory)) {
         $result['message'] = 'No se pudo guardar la consulta. Escríbenos a info@pontelog.com.';
         return $result;
@@ -74,19 +80,11 @@ function handle_contact(array $post, array &$session): array
     }
     @chmod($directory . '/consultas.jsonl', 0600);
     $session['contact_last_sent'] = time();
-    $recipient = getenv('PONTELOG_CONTACT_EMAIL');
-    $sent = false;
-    if (getenv('PONTELOG_MAIL_ENABLED') === '1' && is_string($recipient) && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
-        $body = "Nombre / Empresa: {$values['name']}\nCorreo: {$values['email']}\nTeléfono: {$values['phone']}\n\n{$values['message']}\n\nSolicitud de boletín: " . ($values['newsletter'] ? 'Sí' : 'No');
-        $sent = @mail($recipient, 'Consulta desde Pontelog', $body, [
-            'Reply-To' => $values['email'],
-            'MIME-Version' => '1.0',
-            'Content-Type' => 'text/plain; charset=UTF-8',
-        ]);
-    }
+
+    $sent = send_contact_mail($values, $config);
     $result['status'] = 'success';
     $result['message'] = $sent
-        ? 'Tu consulta se guardó y se entregó al servidor de correo para su envío.'
+        ? 'Tu consulta se guardó y se envió por correo.'
         : 'Tu consulta se guardó en este sitio. El envío de correo no está disponible; para contacto directo escribe a info@pontelog.com.';
     $result['values'] = ['name' => '', 'email' => '', 'phone' => '', 'message' => '', 'newsletter' => false];
     return $result;
