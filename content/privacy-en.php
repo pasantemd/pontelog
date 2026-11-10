@@ -13,10 +13,9 @@ return [
             ],
         ],
         [
-            'heading' => '2. Scope and applicable framework',
+            'heading' => '2. Scope',
             'body' => [
-                'This policy describes the processing this site actually performs. It follows a standard transparency structure (identity, data, purposes, legal bases, recipients, retention and rights), aligned with common principles in frameworks such as the GDPR (EU/EEA), Brazil’s LGPD and regional data-protection laws (for example, Ecuador’s LOPDP).',
-                'Where a local law requires additional rules, that law prevails to that extent.',
+                'This policy covers the personal data collected and processed through pontelog.com as described below.',
             ],
         ],
         [
@@ -85,7 +84,7 @@ return [
         [
             'heading' => '11. Cookies and similar technologies',
             'body' => [
-                'Details are in the Cookie policy. In short: we use necessary session cookies for the form and preference cookies/storage for language and consent; we do not install analytics or advertising cookies on this site.',
+                'Details are in the Cookie policy: form session, language and acknowledgment of the cookie notice. We do not use analytics or advertising cookies.',
             ],
         ],
         [

@@ -6,38 +6,32 @@ return [
     'updated' => 'November 10, 2026',
     'sections' => [
         [
-            'heading' => '1. What this policy covers',
+            'heading' => '1. Cookies this site uses',
             'body' => [
-                'This policy explains the cookies and local storage used by pontelog.com. It only describes what the site does today.',
+                'Site session (PHP session cookie): used for the contact form (protection against forged submissions and resend limits). It lasts for the browser session or according to server settings.',
+                'Language (pontelog_lang cookie): stores the language chosen in the menu (Spanish, English, Portuguese or Chinese). Duration: up to 1 year.',
+                'Notice acknowledgment (pontelog_consent, in a cookie and/or local storage): stores that you saw this site’s cookie notice. Duration: up to 180 days.',
             ],
         ],
         [
-            'heading' => '2. Cookies and technologies we use',
+            'heading' => '2. Contact map',
             'body' => [
-                'Necessary (PHP session): enable the secure contact form (CSRF protection and resend limits). They expire when the browser session ends or according to server settings.',
-                'Language preference (pontelog_lang cookie): remembers the language you chose (Spanish, English, Portuguese or Chinese). Approximate duration: 1 year.',
-                'Cookie-notice preference (pontelog_consent in a cookie and/or local storage): stores whether you accepted or limited non-essential cookies. Approximate duration: 180 days.',
+                'When the contact-section map is shown, the browser requests map images from OpenStreetMap. That service may keep technical logs (for example IP address and requested resource). These are not cookies created by Pontelog.',
             ],
         ],
         [
-            'heading' => '3. What we do not use today',
+            'heading' => '3. What this site does not do',
             'body' => [
-                'This site does not install web-analytics cookies, advertising network cookies or third-party tracking pixels for audience measurement or behavioral advertising.',
-                'Newsletter subscription does not depend on the cookie banner: it happens only if you check the box on the contact form.',
+                'We do not install audience-measurement, advertising or social-network cookies.',
+                'The newsletter is handled only if you check the box on the contact form; it is not turned on by the cookie notice.',
             ],
         ],
         [
-            'heading' => '4. Third-party content when viewing the map',
+            'heading' => '4. How to manage them',
             'body' => [
-                'If you load the contact section with the map, the browser requests map tiles from OpenStreetMap. That provider may create technical logs (for example IP and requested resource). These are not Pontelog cookies.',
-            ],
-        ],
-        [
-            'heading' => '5. Consent and management',
-            'body' => [
-                'Necessary cookies are used for the site to work. Preference cookies are stored when you use the language switcher or the cookie notice.',
-                'You can delete cookies and local storage in your browser. If you remove necessary cookies, the contact form may stop submitting correctly.',
-                'Privacy questions: info@pontelog.com.',
+                'You can delete cookies and local storage in your browser settings.',
+                'If you delete the session cookie, you may need to reload the page to use the form again.',
+                'Questions: info@pontelog.com.',
             ],
         ],
     ],

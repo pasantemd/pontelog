@@ -10,8 +10,7 @@ $cookieTail = explode(':cookies', $afterPrivacy, 2);
       <p><?= e($cookieParts[0]) ?><a href="<?= $base ?>politica-de-privacidad/?lang=<?= e($lang) ?>"><?= e(t('cookie.privacy')) ?></a><?= e($cookieTail[0] ?? '') ?><a href="<?= $base ?>politica-de-cookies/?lang=<?= e($lang) ?>"><?= e(t('cookie.cookies')) ?></a><?= e($cookieTail[1] ?? '') ?></p>
     </div>
     <div class="cookie-actions">
-      <button type="button" class="button button-small" data-cookie-accept><?= e(t('cookie.accept')) ?></button>
-      <button type="button" class="button button-small button-ghost" data-cookie-reject><?= e(t('cookie.reject')) ?></button>
+      <button type="button" class="button button-small" data-cookie-ack><?= e(t('cookie.accept')) ?></button>
     </div>
   </div>
 </div>

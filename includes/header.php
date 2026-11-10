@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="<?= $base ?>assets/fonts.css">
   <link rel="stylesheet" href="<?= $base ?>assets/site.css?v=8">
   <?php if (!$home): ?><link rel="stylesheet" href="<?= $base ?>assets/forms.css?v=4"><?php endif; ?>
-  <script src="<?= $base ?>assets/site.js?v=6" defer></script>
+  <script src="<?= $base ?>assets/site.js?v=7" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido"><?= e(t('skip')) ?></a>

@@ -67,12 +67,11 @@ return [
     'footer.cookies' => 'Cookies',
     'footer.rights' => '© :year Pontelog。保留所有权利。',
 
-    'cookie.title' => 'Cookie 与隐私',
-    'cookie.text' => '我们使用网站必要的 Cookie；若您同意，也会使用偏好 Cookie。请参阅:privacy与:cookies。',
+    'cookie.title' => 'Cookie',
+    'cookie.text' => '我们使用表单会话 Cookie，并可能保存您的语言与本提示。详情见:privacy与:cookies。',
     'cookie.privacy' => '个人数据处理政策',
     'cookie.cookies' => 'Cookie 政策',
-    'cookie.accept' => '接受',
-    'cookie.reject' => '仅必要',
+    'cookie.accept' => '知道了',
 
     'notfound.title' => '此页面不可用。',
     'notfound.text' => '您可以返回首页查看我们的解决方案。',

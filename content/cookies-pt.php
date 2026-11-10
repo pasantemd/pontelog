@@ -6,38 +6,32 @@ return [
     'updated' => '10 de novembro de 2026',
     'sections' => [
         [
-            'heading' => '1. O que esta política cobre',
+            'heading' => '1. Cookies que este site usa',
             'body' => [
-                'Esta política explica as cookies e o armazenamento local usados por pontelog.com. Descreve apenas o que o site faz hoje.',
+                'Sessão do site (cookie de sessão PHP): usada no formulário de contato (proteção contra envios falsos e limite de reenvios). Dura enquanto a sessão do navegador estiver aberta ou conforme a configuração do servidor.',
+                'Idioma (cookie pontelog_lang): guarda o idioma escolhido no menu (espanhol, inglês, português ou chinês). Duração: até 1 ano.',
+                'Aviso informado (pontelog_consent, em cookie e/ou armazenamento local): guarda que você viu o aviso de cookies deste site. Duração: até 180 dias.',
             ],
         ],
         [
-            'heading' => '2. Cookies e tecnologias que usamos',
+            'heading' => '2. Mapa de contato',
             'body' => [
-                'Necessárias (sessão PHP): permitem o funcionamento seguro do formulário de contato (proteção CSRF e limite de reenvios). Expira ao encerrar a sessão do navegador ou conforme a configuração do servidor.',
-                'Preferência de idioma (cookie pontelog_lang): lembra o idioma escolhido. Duração aproximada: 1 ano.',
-                'Preferência do aviso de cookies (pontelog_consent em cookie e/ou armazenamento local): guarda se você aceitou ou limitou cookies não essenciais. Duração aproximada: 180 dias.',
+                'Ao exibir o mapa da seção de contato, o navegador pede imagens de mapa ao OpenStreetMap. Esse serviço pode manter registros técnicos (por exemplo endereço IP e recurso pedido). Não é uma cookie criada pela Pontelog.',
             ],
         ],
         [
-            'heading' => '3. O que não usamos atualmente',
+            'heading' => '3. O que este site não faz',
             'body' => [
-                'Este site não instala cookies de analytics, redes publicitárias nem pixels de rastreamento de terceiros para medir audiência ou fazer publicidade comportamental.',
-                'A assinatura do boletim não depende do banner de cookies: só ocorre se você marcar a caixa do formulário de contato.',
+                'Não instalamos cookies de medição de audiência, publicidade ou redes sociais.',
+                'O boletim só é tratado se você marcar a caixa do formulário de contato; não é ativado pelo aviso de cookies.',
             ],
         ],
         [
-            'heading' => '4. Conteúdo de terceiros ao ver o mapa',
+            'heading' => '4. Como gerenciá-las',
             'body' => [
-                'Se você carregar a seção de contato com o mapa, o navegador solicita tiles do OpenStreetMap. Esse provedor pode gerar registros técnicos (por exemplo IP e recurso solicitado). Não são cookies da Pontelog.',
-            ],
-        ],
-        [
-            'heading' => '5. Consentimento e gestão',
-            'body' => [
-                'As cookies necessárias são usadas para o site funcionar. As de preferência são guardadas quando você usa o seletor de idioma ou o aviso de cookies.',
-                'Você pode apagar cookies e o armazenamento local no navegador. Se remover as necessárias, o formulário pode deixar de enviar corretamente.',
-                'Dúvidas de privacidade: info@pontelog.com.',
+                'Você pode apagar cookies e o armazenamento local nas configurações do navegador.',
+                'Se apagar a cookie de sessão, pode ser necessário recarregar a página para usar o formulário novamente.',
+                'Dúvidas: info@pontelog.com.',
             ],
         ],
     ],

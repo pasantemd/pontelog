@@ -145,16 +145,14 @@
         return null;
       }
     };
-    const writeConsent = (marketing) => {
-      const value = { essential: true, marketing: !!marketing, ts: Date.now() };
+    const writeAck = () => {
+      const value = { noticed: true, ts: Date.now() };
       const encoded = encodeURIComponent(JSON.stringify(value));
       localStorage.setItem(key, JSON.stringify(value));
       document.cookie = `${key}=${encoded}; path=/; max-age=${60 * 60 * 24 * 180}; SameSite=Lax`;
       banner.hidden = true;
-      document.dispatchEvent(new CustomEvent('pontelog:consent', { detail: value }));
     };
     if (!readConsent()) banner.hidden = false;
-    banner.querySelector('[data-cookie-accept]')?.addEventListener('click', () => writeConsent(true));
-    banner.querySelector('[data-cookie-reject]')?.addEventListener('click', () => writeConsent(false));
+    banner.querySelector('[data-cookie-ack]')?.addEventListener('click', writeAck);
   }
 })();

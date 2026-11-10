@@ -67,12 +67,11 @@ return [
     'footer.cookies' => 'Cookies',
     'footer.rights' => '© :year Pontelog. Todos os direitos reservados.',
 
-    'cookie.title' => 'Cookies e privacidade',
-    'cookie.text' => 'Usamos cookies necessários para o site e, se você aceitar, cookies de preferência. Consulte a :privacy e a :cookies.',
+    'cookie.title' => 'Cookies',
+    'cookie.text' => 'Usamos cookies de sessão para o formulário e podemos guardar seu idioma e este aviso. Mais informações na :privacy e na :cookies.',
     'cookie.privacy' => 'política de tratamento de dados',
     'cookie.cookies' => 'política de cookies',
-    'cookie.accept' => 'Aceitar',
-    'cookie.reject' => 'Apenas necessárias',
+    'cookie.accept' => 'Entendi',
 
     'notfound.title' => 'Esta página não está disponível.',
     'notfound.text' => 'Você pode voltar ao início para consultar nossas soluções.',

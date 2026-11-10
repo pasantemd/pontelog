@@ -6,38 +6,32 @@ return [
     'updated' => '2026年11月10日',
     'sections' => [
         [
-            'heading' => '1. 本政策涵盖范围',
+            'heading' => '1. 本网站使用的 Cookie',
             'body' => [
-                '本政策说明 pontelog.com 使用的 Cookie 与本地存储，且仅描述网站当前实际做法。',
+                '网站会话（PHP 会话 Cookie）：用于联系表单（防止伪造提交与重复发送限制）。在浏览器会话期间有效，或按服务器配置过期。',
+                '语言（pontelog_lang Cookie）：保存菜单中选择的语言（西班牙语、英语、葡萄牙语或中文）。最长约 1 年。',
+                '提示确认（pontelog_consent，位于 Cookie 和/或本地存储）：记录您已看到本站 Cookie 提示。最长约 180 天。',
             ],
         ],
         [
-            'heading' => '2. 我们使用的 Cookie 与技术',
+            'heading' => '2. 联系地图',
             'body' => [
-                '必要（PHP 会话）：用于安全运行联系表单（CSRF 防护与重复发送限制）。在浏览器会话结束时或按服务器配置过期。',
-                '语言偏好（pontelog_lang Cookie）：记住您选择的语言。大约保存 1 年。',
-                'Cookie 提示偏好（cookie 和/或本地存储中的 pontelog_consent）：保存您是否接受或限制非必要 Cookie。大约保存 180 天。',
+                '显示联系区块地图时，浏览器会向 OpenStreetMap 请求地图图片。该服务可能保留技术日志（例如 IP 地址与请求资源）。这些不是 Pontelog 创建的 Cookie。',
             ],
         ],
         [
-            'heading' => '3. 我们当前不使用的内容',
+            'heading' => '3. 本网站不做的事项',
             'body' => [
-                '本网站不安装网站分析 Cookie、广告网络 Cookie，也不使用第三方跟踪像素进行受众测量或行为广告。',
-                '通讯订阅不依赖 Cookie 横幅：只有在联系表单中勾选相应选项时才会发生。',
+                '我们不安装受众测量、广告或社交网络 Cookie。',
+                '通讯仅在您勾选联系表单选项时处理；不会因 Cookie 提示而开启。',
             ],
         ],
         [
-            'heading' => '4. 查看地图时的第三方内容',
+            'heading' => '4. 如何管理',
             'body' => [
-                '若加载带地图的联系区块，浏览器会向 OpenStreetMap 请求地图瓦片。该提供商可能产生技术日志（例如 IP 与请求资源）。这些不是 Pontelog 的 Cookie。',
-            ],
-        ],
-        [
-            'heading' => '5. 同意与管理',
-            'body' => [
-                '必要 Cookie 用于网站运行。偏好 Cookie 会在您使用语言切换或 Cookie 提示时保存。',
-                '您可在浏览器中删除 Cookie 与本地存储。若删除必要 Cookie，联系表单可能无法正常提交。',
-                '隐私问题请联系：info@pontelog.com。',
+                '您可在浏览器设置中删除 Cookie 与本地存储。',
+                '若删除会话 Cookie，可能需要重新加载页面才能再次使用表单。',
+                '咨询邮箱：info@pontelog.com。',
             ],
         ],
     ],

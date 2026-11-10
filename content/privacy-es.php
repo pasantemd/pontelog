@@ -13,10 +13,9 @@ return [
             ],
         ],
         [
-            'heading' => '2. Ámbito y marco aplicable',
+            'heading' => '2. Ámbito',
             'body' => [
-                'Esta política describe el tratamiento que realmente realiza este sitio. Se redacta con una estructura habitual de transparencia (identidad, datos, finalidades, bases, destinatarios, conservación y derechos), alineada a principios comunes de normas como el GDPR (UE/EEE), la LGPD (Brasil) y leyes regionales de protección de datos (por ejemplo, la LOPDP en Ecuador).',
-                'Si una norma local exige requisitos adicionales, prevalecerá esa norma en lo que corresponda.',
+                'Esta política aplica a los datos personales que se recogen y tratan a través de pontelog.com según se describe a continuación.',
             ],
         ],
         [
@@ -85,7 +84,7 @@ return [
         [
             'heading' => '11. Cookies y tecnologías similares',
             'body' => [
-                'El detalle de cookies y almacenamiento local está en la Política de cookies. En resumen: usamos cookies/sesión necesarias para el formulario y preferencias de idioma y consentimiento; no instalamos cookies de analítica ni de publicidad en este sitio.',
+                'El detalle está en la Política de cookies: sesión del formulario, idioma y registro de que se mostró el aviso de cookies. No usamos cookies de analítica ni de publicidad.',
             ],
         ],
         [
