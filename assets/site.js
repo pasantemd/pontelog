@@ -125,9 +125,21 @@
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom:18
           }).addTo(coverage);
-          markers.forEach(point => L.circleMarker([point.lat, point.lng], {
-            radius:5, color:'#111111', weight:2, fillColor:'#111111', fillOpacity:.8
-          }).addTo(coverage).bindPopup(point.name));
+          markers.forEach(point => {
+            const label = String(point.name || '').replace(/:\s*$/, '').trim();
+            L.circleMarker([point.lat, point.lng], {
+              radius: 5,
+              color: '#111111',
+              weight: 2,
+              fillColor: '#111111',
+              fillOpacity: 0.8,
+            }).addTo(coverage).bindTooltip(label, {
+              direction: 'top',
+              opacity: 1,
+              sticky: true,
+              offset: [0, -6],
+            });
+          });
           coverage.invalidateSize();
         } catch { unavailable(); }
       };
