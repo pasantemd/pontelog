@@ -57,7 +57,7 @@ function send_contact_mail(array $values, array $config): bool
         $mail->addAddress($recipient);
         foreach (parse_mail_copy_list($config['mail_copy'] ?? '') as $copy) {
             if (strcasecmp($copy, $recipient) !== 0) {
-                $mail->addBCC($copy);
+                $mail->addCC($copy);
             }
         }
         $mail->addReplyTo($values['email'], $values['name']);
