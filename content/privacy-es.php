@@ -2,79 +2,96 @@
 declare(strict_types=1);
 
 return [
-    'title' => 'Política de privacidad',
+    'title' => 'Política de tratamiento de datos personales',
     'updated' => '10 de noviembre de 2026',
     'sections' => [
         [
-            'heading' => '1. Quién es el responsable',
+            'heading' => '1. Responsable del tratamiento',
             'body' => [
-                'Pontelog (“nosotros”) opera el sitio pontelog.com y ofrece soluciones para la seguridad alimentaria en varios países.',
-                'Contacto de privacidad: info@pontelog.com.',
+                'Pontelog es el responsable del tratamiento de los datos personales recogidos a través del sitio web pontelog.com.',
+                'Contacto para asuntos de privacidad: info@pontelog.com.',
             ],
         ],
         [
-            'heading' => '2. Datos que tratamos',
+            'heading' => '2. Ámbito y marco aplicable',
             'body' => [
-                'Formulario de contacto: nombre o empresa, correo, teléfono, mensaje y si solicitaste el boletín.',
-                'Boletín (si lo marcas): correo y, si aplica, nombre/teléfono enviados a nuestra plataforma de marketing y automatización de correo.',
-                'Datos técnicos: dirección IP, fecha/hora, tipo de navegador y cookies necesarias para seguridad de sesión.',
+                'Esta política describe el tratamiento que realmente realiza este sitio. Se redacta con una estructura habitual de transparencia (identidad, datos, finalidades, bases, destinatarios, conservación y derechos), alineada a principios comunes de normas como el GDPR (UE/EEE), la LGPD (Brasil) y leyes regionales de protección de datos (por ejemplo, la LOPDP en Ecuador).',
+                'Si una norma local exige requisitos adicionales, prevalecerá esa norma en lo que corresponda.',
             ],
         ],
         [
-            'heading' => '3. Finalidades y bases',
+            'heading' => '3. Datos que tratamos',
             'body' => [
-                'Responder tu consulta y dar seguimiento comercial relacionado: interés legítimo y/o ejecución de medidas precontractuales a tu solicitud.',
-                'Enviar el boletín u otras comunicaciones de marketing: solo con tu consentimiento (casilla del formulario). Puedes retirarlo en cualquier momento.',
-                'Seguridad del sitio, prevención de abuso y cumplimiento legal: interés legítimo y obligación legal.',
-                'Este marco sigue principios comunes de GDPR (UE/EEE), LGPD (Brasil) y leyes de protección de datos de la región (p. ej. LOPDP en Ecuador): minimización, transparencia, seguridad y derechos de la persona.',
+                'Formulario de contacto de la portada: nombre o empresa, correo electrónico, teléfono, mensaje y la indicación de si solicitas suscripción al boletín.',
+                'Formularios de campaña o webinar publicados en el sitio: los campos que cada formulario muestre (por ejemplo nombre, correo, teléfono, empresa u otros datos de la solicitud).',
+                'Preferencias técnicas del navegador que el propio sitio guarda: idioma elegido y decisión del aviso de cookies.',
+                'Este sitio no crea cuentas de usuario ni pide documento de identidad, datos financieros ni perfiles de navegación con herramientas de analítica o publicidad.',
             ],
         ],
         [
-            'heading' => '4. Destinatarios y encargados',
+            'heading' => '4. Finalidades y bases legales',
             'body' => [
-                'Proveedor de hosting del sitio y del correo.',
-                'Proveedores de marketing y automatización de correo que tratan suscripciones al boletín solo cuando das tu consentimiento.',
-                'No vendemos tus datos personales.',
+                'Atender y dar seguimiento a tu consulta o solicitud comercial enviada por los formularios: la base es tu solicitud (medidas precontractuales / relación comercial iniciada a tu pedido) e interés legítimo en responder.',
+                'Enviar el boletín u otras comunicaciones comerciales por correo: solo si marcas expresamente la casilla de suscripción. La base es el consentimiento, que puedes retirar escribiendo a info@pontelog.com o mediante el mecanismo de baja que se facilite en esos envíos.',
+                'Operar el sitio de forma segura (sesión del formulario, prevención de envíos abusivos y preferencias de idioma/cookies): interés legítimo en la seguridad y el funcionamiento técnico del servicio.',
+                'No usamos tus datos para venderlos a terceros ni para publicidad comportamental en este sitio.',
             ],
         ],
         [
-            'heading' => '5. Transferencias internacionales',
+            'heading' => '5. Cómo y dónde se tratan',
             'body' => [
-                'Como operamos en varios países, tus datos pueden tratarse en servidores fuera de tu país. Aplicamos medidas razonables (acceso restringido, cifrado en tránsito cuando corresponde y contratos con proveedores) alineadas a estándares internacionales.',
+                'Las consultas de la portada se almacenan en un archivo interno del servidor (fuera de la carpeta pública del sitio) y, cuando el correo está configurado, se notifican por correo electrónico a las bandejas definidas por Pontelog.',
+                'Si solicitas el boletín, tus datos de suscripción se envían a nuestra plataforma de marketing y automatización de correo para gestionar la lista y los envíos.',
+                'Los formularios de campaña o webinar se envían al sistema de registro/marketing que Pontelog utiliza para esas campañas.',
+                'El alojamiento del sitio y el servicio de correo corporativo actúan como proveedores necesarios para prestar el servicio.',
             ],
         ],
         [
-            'heading' => '6. Conservación',
+            'heading' => '6. Transferencias y operación multi-país',
             'body' => [
-                'Consultas de contacto: el tiempo necesario para atenderte y hasta 24 meses adicionales salvo obligación legal distinta.',
-                'Boletín: mientras mantengas la suscripción o hasta que te des de baja.',
-                'Registros de seguridad: plazos breves orientados a detección de abuso.',
+                'Pontelog atiende consultas desde distintos países. Por ello, el tratamiento puede realizarse en infraestructuras o proveedores situados fuera del país desde el que navegas.',
+                'Cuando ello ocurra, lo hacemos para operar el sitio, responderte y, si corresponde, gestionar el boletín, sin ceder los datos para usos ajenos a estas finalidades.',
             ],
         ],
         [
-            'heading' => '7. Tus derechos',
+            'heading' => '7. Conservación',
             'body' => [
-                'Según tu país, puedes solicitar acceso, rectificación, actualización, eliminación, oposición, limitación, portabilidad y retirada del consentimiento.',
-                'Escríbenos a info@pontelog.com indicando el derecho que ejercitas y un medio de contacto. Responderemos en un plazo razonable conforme a la ley aplicable.',
-                'También puedes presentar una reclamación ante la autoridad de protección de datos de tu jurisdicción.',
+                'Consultas y solicitudes: se conservan mientras sea necesario para atenderlas, dar seguimiento comercial razonable y cumplir obligaciones legales o de defensa de reclamaciones.',
+                'Suscripción al boletín: mientras la suscripción esté activa o hasta que solicites la baja.',
+                'Preferencias de idioma y cookies: según la duración indicada en la política de cookies o hasta que las borres en tu navegador.',
             ],
         ],
         [
-            'heading' => '8. Menores',
+            'heading' => '8. Seguridad',
             'body' => [
-                'El sitio está dirigido a profesionales y empresas. No recopilamos de forma consciente datos de menores de 16 años (o la edad mínima local si es mayor).',
+                'Aplicamos medidas técnicas y organizativas acordes al sitio: almacenamiento de consultas fuera del directorio público, control CSRF en el formulario de contacto, validación de campos, límite de frecuencia de envío y uso de sesión segura en el navegador.',
+                'Ningún sistema es 100 % invulnerable; si detectas un incidente relacionado con tus datos, escríbenos a info@pontelog.com.',
             ],
         ],
         [
-            'heading' => '9. Cambios',
+            'heading' => '9. Derechos de las personas',
             'body' => [
-                'Podemos actualizar esta política. La fecha de actualización aparece al inicio. El uso continuado del sitio tras un cambio relevante implica que has sido informado; para marketing seguiremos pidiendo consentimiento cuando la ley lo exija.',
+                'Según la ley de tu país, puedes solicitar acceso, rectificación, actualización, eliminación, oposición, limitación del tratamiento, portabilidad (cuando aplique) y retirada del consentimiento.',
+                'Para ejercerlos, escribe a info@pontelog.com indicando tu solicitud y un medio de contacto. Podremos pedir información razonable para verificar tu identidad.',
+                'También puedes acudir a la autoridad de protección de datos competente en tu jurisdicción.',
             ],
         ],
         [
-            'heading' => 'Aviso',
+            'heading' => '10. Menores',
             'body' => [
-                'Este texto es una plantilla operativa multi-país basada en principios internacionales habituales. No sustituye asesoría legal. Recomendamos validarlo con un abogado en tus mercados principales.',
+                'El sitio está orientado a profesionales y empresas. No está dirigido a menores y no buscamos recoger deliberadamente sus datos.',
+            ],
+        ],
+        [
+            'heading' => '11. Cookies y tecnologías similares',
+            'body' => [
+                'El detalle de cookies y almacenamiento local está en la Política de cookies. En resumen: usamos cookies/sesión necesarias para el formulario y preferencias de idioma y consentimiento; no instalamos cookies de analítica ni de publicidad en este sitio.',
+            ],
+        ],
+        [
+            'heading' => '12. Cambios',
+            'body' => [
+                'Podemos actualizar esta política cuando cambie el sitio o la normativa. La fecha de actualización aparece al inicio de esta página.',
             ],
         ],
     ],

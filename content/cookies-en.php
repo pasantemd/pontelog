@@ -6,45 +6,38 @@ return [
     'updated' => 'November 10, 2026',
     'sections' => [
         [
-            'heading' => '1. What cookies are',
+            'heading' => '1. What this policy covers',
             'body' => [
-                'Cookies are small files stored on your device to make the site work, remember preferences or measure use. Similar technologies (local storage) are treated the same here.',
+                'This policy explains the cookies and local storage used by pontelog.com. It only describes what the site does today.',
             ],
         ],
         [
-            'heading' => '2. How we ask for consent',
+            'heading' => '2. Cookies and technologies we use',
             'body' => [
-                'When you arrive you will see a notice to accept or reject non-essential cookies. Strictly necessary cookies are always used for security and basic operation.',
-                'You can change your choice by clearing browser cookies and reloading pontelog.com, or by emailing info@pontelog.com.',
-                'This approach follows the informed-consent model used in GDPR/ePrivacy and good practice across Latin America.',
+                'Necessary (PHP session): enable the secure contact form (CSRF protection and resend limits). They expire when the browser session ends or according to server settings.',
+                'Language preference (pontelog_lang cookie): remembers the language you chose (Spanish, English, Portuguese or Chinese). Approximate duration: 1 year.',
+                'Cookie-notice preference (pontelog_consent in a cookie and/or local storage): stores whether you accepted or limited non-essential cookies. Approximate duration: 180 days.',
             ],
         ],
         [
-            'heading' => '3. Types we use',
+            'heading' => '3. What we do not use today',
             'body' => [
-                'Necessary: PHP session cookie for the contact form (CSRF and anti-abuse).',
-                'Preferences: we store your banner decision in a cookie or local storage named pontelog_consent.',
-                'Marketing/analytics: only if we enable them later and you accept them. Newsletter signup depends on the form checkbox, not the banner.',
+                'This site does not install web-analytics cookies, advertising network cookies or third-party tracking pixels for audience measurement or behavioral advertising.',
+                'Newsletter subscription does not depend on the cookie banner: it happens only if you check the box on the contact form.',
             ],
         ],
         [
-            'heading' => '4. Orientative table',
+            'heading' => '4. Third-party content when viewing the map',
             'body' => [
-                'pontelog_consent — cookie preference — up to 180 days — first-party.',
-                'PHPSESSID (or equivalent) — form security — session — first-party.',
-                'Map providers (OpenStreetMap tiles via Leaflet) may log technical network requests when the map loads.',
+                'If you load the contact section with the map, the browser requests map tiles from OpenStreetMap. That provider may create technical logs (for example IP and requested resource). These are not Pontelog cookies.',
             ],
         ],
         [
-            'heading' => '5. How to manage them',
+            'heading' => '5. Consent and management',
             'body' => [
-                'You can block or delete cookies in your browser settings. Blocking necessary cookies may break parts of the site (such as contact).',
-            ],
-        ],
-        [
-            'heading' => 'Notice',
-            'body' => [
-                'Multi-country template for transparency and consent. Validate it with legal counsel for specific local requirements.',
+                'Necessary cookies are used for the site to work. Preference cookies are stored when you use the language switcher or the cookie notice.',
+                'You can delete cookies and local storage in your browser. If you remove necessary cookies, the contact form may stop submitting correctly.',
+                'Privacy questions: info@pontelog.com.',
             ],
         ],
     ],
