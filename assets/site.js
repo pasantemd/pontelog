@@ -102,33 +102,56 @@
   if (map) {
     const unavailable = () => {
       map.classList.add('map-unavailable');
-      map.textContent = 'El mapa no está disponible. Consulta los países en la lista inferior.';
+      map.textContent = 'El mapa no está disponible. Escríbenos para consultar la atención en tu país.';
     };
       map.textContent = 'Cargando mapa…';
-      const root = new URL('assets/vendor/leaflet/', base);
+      const root = new URL('assets/vendor/jsvectormap/', base);
       const css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = new URL('leaflet.css', root);
+      css.href = new URL('jsvectormap.min.css', root);
       const cssReady = new Promise((resolve, reject) => { css.onload = resolve; css.onerror = reject; });
       document.head.append(css);
       const script = document.createElement('script');
-      script.src = new URL('leaflet.js', root);
+      script.src = new URL('jsvectormap.min.js', root);
       script.onerror = unavailable;
       script.onload = async () => {
         try {
           await cssReady;
+          await new Promise((resolve, reject) => {
+            const geography = document.createElement('script');
+            geography.src = new URL('america.js', root);
+            geography.onload = resolve;
+            geography.onerror = reject;
+            document.head.append(geography);
+          });
           const response = await fetch(new URL('assets/map-markers.json', base));
           if (!response.ok) throw new Error('map-data');
           const markers = await response.json();
           map.textContent = '';
-          const coverage = L.map(map, {scrollWheelZoom:false}).setView([12, -82], 2);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom:18
-          }).addTo(coverage);
-          markers.forEach(point => L.circleMarker([point.lat, point.lng], {
-            radius:5, color:'#111111', weight:2, fillColor:'#111111', fillOpacity:.8
-          }).addTo(coverage).bindPopup(point.name));
-          coverage.invalidateSize();
+          new jsVectorMap({
+            selector: '#coverage-map', map: 'america', backgroundColor: '#f5f5f5',
+            zoomOnScroll: false, zoomButtons: true, zoomMin: 1, zoomMax: 8,
+            zoomAnimate: !matchMedia('(prefers-reduced-motion: reduce)').matches,
+            regionStyle: {
+              initial: {fill: '#d4d4d4', stroke: '#ffffff', strokeWidth: 0.8},
+              hover: {fill: '#b4b4b4', cursor: 'default'}
+            },
+            markers: markers.map(point => ({name: point.name.replace(/:$/, ''), coords: [point.lat, point.lng]})),
+            markerStyle: {
+              initial: {r: 4, fill: '#111111', stroke: '#ffffff', strokeWidth: 1.5},
+              hover: {fill: '#555555', stroke: '#111111'}
+            },
+            onRegionTooltipShow: event => event.preventDefault(),
+            onMarkerTooltipShow: (event, tooltip, index) => tooltip.text(markers[index].name.replace(/:$/, ''))
+          });
+          map.querySelectorAll('.jvm-zoom-btn').forEach(button => {
+            button.setAttribute('role', 'button');
+            button.tabIndex = 0;
+            button.setAttribute('aria-label', button.classList.contains('jvm-zoomin') ? 'Acercar mapa' : 'Alejar mapa');
+            button.addEventListener('keydown', event => {
+              if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); button.click(); }
+            });
+          });
         } catch { unavailable(); }
       };
       document.head.append(script);

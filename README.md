@@ -21,7 +21,7 @@ Rutas adicionales conservadas:
 - `content/site.php`: identificadores, textos y logotipos de las soluciones, empresa, misión y visión.
 - `content/form-3.html` y `content/form-13.html`: campos originales de campaña y webinar.
 - `assets/site.css`, `assets/forms.css` y `assets/site.js`: presentación e interacciones.
-- `assets/images/`, `assets/fonts/` y `assets/vendor/leaflet/`: recursos locales utilizados.
+- `assets/images/`, `assets/fonts/` y `assets/vendor/jsvectormap/`: recursos locales utilizados.
 - `assets/map-markers.json`: coordenadas del mapa original.
 
 ## Contacto y correo
@@ -61,4 +61,4 @@ Si el SMTP no está configurado o falla, la consulta igual se guarda en disco y 
 
 Los formularios de campaña y webinar mantienen el destino HTTPS original en `mkt.apracom-ec.com`. Las cantidades aparecen al seleccionar una placa y «Describa» al elegir «Otros». Las fechas de las campañas se conservan como fueron publicadas; no representan disponibilidad actual verificada.
 
-Leaflet se sirve localmente; las teselas de OpenStreetMap necesitan Internet. El mapa está visible junto al formulario y conserva una lista alternativa de países, sin afirmar oficinas ni cobertura comercial.
+El mapa vectorial de América se sirve localmente con jsVectorMap y conserva los 17 marcadores originales y controles de zoom. Está visible junto al formulario, sin afirmar oficinas ni cobertura comercial.

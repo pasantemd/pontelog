@@ -9,9 +9,9 @@
   <meta name="description" content="Soluciones de Pontelog para la seguridad alimentaria: microbiología, muestreo, higiene y detección.">
   <link rel="icon" href="<?= asset('cropped-cropped-Logo-PONTE-32x32.png') ?>">
   <link rel="stylesheet" href="<?= $base ?>assets/fonts.css">
-  <link rel="stylesheet" href="<?= $base ?>assets/site.css?v=6">
+  <link rel="stylesheet" href="<?= $base ?>assets/site.css?v=9">
   <?php if (!$home): ?><link rel="stylesheet" href="<?= $base ?>assets/forms.css?v=4"><?php endif; ?>
-  <script src="<?= $base ?>assets/site.js?v=4" defer></script>
+  <script src="<?= $base ?>assets/site.js?v=5" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>

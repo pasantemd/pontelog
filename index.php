@@ -55,7 +55,7 @@ require __DIR__ . '/includes/header.php';
 <section id="Contactenos" class="contact-section section-space" aria-labelledby="contact-title">
   <div class="container contact-layout">
     <div class="contact-copy"><h2 id="contact-title">Contáctenos</h2><p>Escríbenos para conocer nuestras soluciones.</p><a class="contact-email" href="mailto:info@pontelog.com">info@pontelog.com <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 5l8 7 8-7"/></svg></a>
-      <div class="map-panel contact-map"><div id="coverage-map" aria-label="Mapa de países incluidos en el sitio original"></div><details class="country-details"><summary>Ver países en el mapa</summary><p><?= e(implode(', ', array_map(fn($m) => rtrim($m['name'], ':'), json_decode(file_get_contents(__DIR__ . '/assets/map-markers.json'), true)))) ?>.</p></details><p class="map-note">Escríbenos para confirmar la atención y disponibilidad en tu país.</p></div>
+      <div class="map-panel contact-map"><div id="coverage-map" aria-label="Mapa de países incluidos en el sitio original"></div><p class="map-note">Escríbenos para confirmar la atención y disponibilidad en tu país.</p></div>
     </div>
     <?php require __DIR__ . '/includes/contact-form.php'; ?>
   </div>
