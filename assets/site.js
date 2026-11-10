@@ -2,6 +2,7 @@
   const base = new URL('../', document.currentScript.src);
   const menu = document.querySelector('.menu-toggle');
   const nav = document.querySelector('#main-nav');
+  const header = document.querySelector('.site-header');
   const closeMenu = () => {
     nav.classList.remove('is-open');
     menu.setAttribute('aria-expanded', 'false');
@@ -19,6 +20,14 @@
     }
   });
   matchMedia('(min-width: 981px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
+
+  if (header) {
+    const syncHeader = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 12);
+    };
+    syncHeader();
+    window.addEventListener('scroll', syncHeader, { passive: true });
+  }
 
   document.querySelectorAll('.solution-tile').forEach(card => {
     const front = card.querySelector('.flip-front');
