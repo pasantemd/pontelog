@@ -1,12 +1,12 @@
 ﻿# Pontelog en PHP
 
-Web de Pontelog con ocho tarjetas giratorias, contacto con mapa y dos formularios de campaña. PHP nativo, sin WordPress ni base de datos. El envío de correo usa PHPMailer (incluido en `lib/PHPMailer/`).
+Web de Pontelog (`pontelog.com`) con ocho tarjetas giratorias, contacto con mapa y dos formularios de campaña. PHP nativo, sin WordPress ni base de datos. El envío de correo usa PHPMailer (incluido en `lib/PHPMailer/`).
 
 ## Ejecutar
 
-Con Apache de XAMPP: **http://localhost/pontelog/**.
+Sitio en producción: **https://pontelog.com/**
 
-Requiere PHP 8.1 o superior con DOM, OpenSSL, mod_rewrite y AllowOverride. La ejecución se realiza mediante Apache de XAMPP.
+Requiere PHP 8.1 o superior con DOM, OpenSSL, mod_rewrite y AllowOverride.
 
 Rutas adicionales conservadas:
 
@@ -26,13 +26,13 @@ Rutas adicionales conservadas:
 
 ## Contacto y correo
 
-Las consultas se guardan fuera de la carpeta pública, por defecto en `C:/xampp/pontelog-data/consultas.jsonl`. Se aplican CSRF, validación, honeypot y límite de frecuencia. El consentimiento al boletín se registra sin suscripción automática.
+Las consultas se guardan fuera de la carpeta pública del sitio (por defecto, un directorio hermano `pontelog-data/consultas.jsonl`). Se aplican CSRF, validación, honeypot y límite de frecuencia. El consentimiento al boletín se registra sin suscripción automática.
 
-Para enviar el aviso por correo con PHPMailer:
+Para enviar el aviso por correo con PHPMailer en `pontelog.com`:
 
-1. Copia `config.local.php.example` a `config.local.php`.
-2. Completa host, puerto, usuario y contraseña SMTP.
-3. Reinicia Apache si hace falta.
+1. Copia `config.local.php.example` a `config.local.php` en la raíz del sitio.
+2. Completa host, puerto, usuario y contraseña SMTP del hosting (suele ser `mail.pontelog.com`).
+3. Ajusta `data_dir` a una ruta privada fuera del document root.
 
 Ejemplo mínimo en `config.local.php`:
 
@@ -43,12 +43,12 @@ return [
     'contact_email' => 'info@pontelog.com',
     'mail_from' => 'info@pontelog.com',
     'mail_from_name' => 'Pontelog',
-    'smtp_host' => 'smtp.tudominio.com',
+    'smtp_host' => 'mail.pontelog.com',
     'smtp_port' => 587,
     'smtp_user' => 'info@pontelog.com',
     'smtp_pass' => 'TU_CLAVE_SMTP',
     'smtp_secure' => 'tls',
-    'data_dir' => 'C:/xampp/pontelog-data',
+    'data_dir' => '/home/TU_USUARIO/pontelog-data',
 ];
 ```
 

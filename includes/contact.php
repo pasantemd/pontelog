@@ -57,9 +57,10 @@ function handle_contact(array $post, array &$session): array
     }
 
     $config = pontelog_config();
+    // Por defecto: carpeta hermana al sitio (fuera del document root en hosting típico).
     $directory = $config['data_dir'] !== ''
         ? (string) $config['data_dir']
-        : dirname(__DIR__, 3) . '/pontelog-data';
+        : dirname(__DIR__, 2) . '/pontelog-data';
     if (!is_dir($directory) && !@mkdir($directory, 0700, true) && !is_dir($directory)) {
         $result['message'] = 'No se pudo guardar la consulta. Escríbenos a info@pontelog.com.';
         return $result;

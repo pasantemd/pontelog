@@ -5,22 +5,26 @@ declare(strict_types=1);
  * Copia este archivo a config.local.php y completa tus datos SMTP.
  * config.local.php no se sube a git (.gitignore).
  *
- * Ejemplo Gmail / Google Workspace:
+ * Dominio: pontelog.com
+ * Hosting cPanel típico:
+ *   host mail.pontelog.com, puerto 465 + ssl, o 587 + tls
+ *
+ * Gmail / Google Workspace:
  *   host smtp.gmail.com, puerto 587, secure tls
  *   usa una "Contraseña de aplicación", no la clave normal.
  *
- * Ejemplo hosting cPanel típico:
- *   host mail.tudominio.com, puerto 465 + ssl, o 587 + tls
+ * data_dir debe estar FUERA de la carpeta pública del sitio
+ * (por ejemplo, un nivel arriba del document root).
  */
 return [
     'mail_enabled' => true,
     'contact_email' => 'info@pontelog.com',
     'mail_from' => 'info@pontelog.com',
     'mail_from_name' => 'Pontelog',
-    'smtp_host' => 'smtp.tudominio.com',
+    'smtp_host' => 'mail.pontelog.com',
     'smtp_port' => 587,
     'smtp_user' => 'info@pontelog.com',
     'smtp_pass' => 'TU_CLAVE_SMTP',
     'smtp_secure' => 'tls', // tls | ssl | '' (sin cifrado)
-    'data_dir' => 'C:/xampp/pontelog-data',
+    'data_dir' => '/home/TU_USUARIO/pontelog-data',
 ];
