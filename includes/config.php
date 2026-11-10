@@ -23,10 +23,11 @@ function pontelog_config(): array
         'smtp_user' => '',
         'smtp_pass' => '',
         'smtp_secure' => 'tls', // tls | ssl | ''
-        'mail_debug' => false, // true = muestra el error SMTP en el formulario
+        'mail_debug' => false, // true solo para diagnóstico local; nunca en producción
         'data_dir' => '',
         'mautic_enabled' => false,
-        'mautic_base_url' => 'https://mkt.apracom-ec.com',
+        'mautic_base_url' => '',
+
         'mautic_client_id' => '',
         'mautic_client_secret' => '',
         'mautic_segment_id' => '20',

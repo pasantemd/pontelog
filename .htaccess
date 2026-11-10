@@ -2,7 +2,7 @@ Options -Indexes
 DirectoryIndex index.php
 RewriteEngine On
 RewriteRule ^\.git(?:/|$) - [F,L]
-RewriteRule ^(includes|content)/ - [F,L]
+RewriteRule ^(includes|content|lib)/ - [F,L]
 RewriteRule ^(invitacion-de-webinar-2026|formulario-pontelog|politica-de-privacidad|politica-de-cookies)/?$ index.php?page=$1 [L,QSA]
 <FilesMatch "\.(md)$">
 Require all denied
@@ -10,5 +10,17 @@ Require all denied
 <Files "config.local.php">
 Require all denied
 </Files>
+<Files "config.local.php.example">
+Require all denied
+</Files>
 AddType application/json .json
 AddType application/geo+json .geojson
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'"
+</IfModule>

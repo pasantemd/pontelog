@@ -67,8 +67,8 @@ function send_contact_mail(array $values, array $config): array
             $mail->SMTPAutoTLS = false;
         }
 
-        // En cPanel/localhost el certificado suele ser interno; sin esto falla el TLS.
-        if (in_array(strtolower($host), ['localhost', '127.0.0.1'], true) || !empty($config['smtp_allow_self_signed'])) {
+        // Solo relajar TLS en SMTP local (cPanel/localhost). Nunca en hosts remotos.
+        if (in_array(strtolower($host), ['localhost', '127.0.0.1'], true)) {
             $mail->SMTPOptions = [
                 'ssl' => [
                     'verify_peer' => false,

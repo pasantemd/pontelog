@@ -1,11 +1,27 @@
 <?php
 declare(strict_types=1);
 date_default_timezone_set('America/Guayaquil');
-session_start(['cookie_httponly' => true, 'cookie_samesite' => 'Lax']);
+$https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+    || (isset($_SERVER['SERVER_PORT']) && (int) $_SERVER['SERVER_PORT'] === 443)
+    || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+session_start([
+    'cookie_httponly' => true,
+    'cookie_samesite' => 'Lax',
+    'cookie_secure' => $https,
+    'use_strict_mode' => true,
+]);
 require __DIR__ . '/includes/i18n.php';
 $lang = pontelog_detect_lang();
 require __DIR__ . '/includes/contact.php';
 function e(string $value): string { return htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); }
+if (!headers_sent()) {
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+    header('Cross-Origin-Opener-Policy: same-origin');
+    header("Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'");
+}
 $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/') . '/';
 if ($base === '//') $base = '/';
 function asset(string $file): string { global $base; return $base . 'assets/images/' . $file; }

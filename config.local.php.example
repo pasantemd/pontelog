@@ -5,29 +5,30 @@ declare(strict_types=1);
  * Copia este archivo a config.local.php y completa tus datos.
  * config.local.php no se sube a git (.gitignore).
  *
- * Dominio: pontelog.com (cPanel)
+ * SMTP: si falla la conexión externa, prueba localhost:587/tls o localhost:465/ssl.
+ * Mautic: formulario ID 14 y segmento ID 20 (Boletin Pontelog Web).
  *
- * SMTP: si falla la conexión prueba localhost:587/tls o localhost:465/ssl.
- * Mautic: ya existe formulario ID 14 y segmento ID 20 (Boletin Pontelog Web).
+ * Seguridad:
+ * - mail_debug debe quedar en false en producción.
+ * - data_dir debe estar FUERA del document root del sitio.
  */
 return [
     'mail_enabled' => true,
-    'contact_email' => 'info@pontelog.com',
-    'mail_copy' => 'ctenemaza@apracom-ec.com',
-    'mail_from' => 'web@pontelog.com',
+    'contact_email' => 'info@tudominio.com',
+    'mail_copy' => 'copia@tudominio.com',
+    'mail_from' => 'web@tudominio.com',
     'mail_from_name' => 'Pontelog',
-    'smtp_host' => 'mail.mxcloudmail.com',
+    'smtp_host' => 'localhost',
     'smtp_port' => 587,
-    'smtp_user' => 'web@pontelog.com',
+    'smtp_user' => 'web@tudominio.com',
     'smtp_pass' => 'TU_CLAVE_SMTP',
     'smtp_secure' => 'tls',
-    'smtp_allow_self_signed' => true,
     'mail_debug' => false,
-    'data_dir' => '/home/atvercor/pontelog-data',
+    'data_dir' => '/home/TU_USUARIO/pontelog-data',
 
     // Boletín → Mautic API (preferido) + formulario 14 de respaldo
     'mautic_enabled' => true,
-    'mautic_base_url' => 'https://mkt.apracom-ec.com',
+    'mautic_base_url' => 'https://TU_MAUTIC.ejemplo.com',
     'mautic_client_id' => 'TU_PUBLIC_KEY_MAUTIC',
     'mautic_client_secret' => 'TU_SECRET_MAUTIC',
     'mautic_segment_id' => '20',

@@ -26,7 +26,7 @@ Rutas adicionales conservadas:
 
 ## Contacto y correo
 
-Las consultas se guardan fuera de la carpeta pública del sitio (por defecto, un directorio hermano `pontelog-data/consultas.jsonl`). Se aplican CSRF, validación, honeypot y límite de frecuencia. El consentimiento al boletín se registra sin suscripción automática.
+Las consultas se guardan fuera de la carpeta pública del sitio (por defecto, un directorio hermano `pontelog-data/consultas.jsonl`). Se aplican CSRF (rotado tras cada envío), validación, honeypot, límite por sesión (30 s) y límite por IP (1/30 s, 5/hora, 15/día). Cabeceras de seguridad y bloqueo de `includes/`, `content/`, `lib/` y `config.local.php`.
 
 Para enviar el aviso por correo con PHPMailer en `pontelog.com`:
 
