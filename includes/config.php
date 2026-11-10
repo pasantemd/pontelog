@@ -25,6 +25,13 @@ function pontelog_config(): array
         'smtp_secure' => 'tls', // tls | ssl | ''
         'mail_debug' => false, // true = muestra el error SMTP en el formulario
         'data_dir' => '',
+        'mautic_enabled' => false,
+        'mautic_base_url' => 'https://mkt.apracom-ec.com',
+        'mautic_form_id' => '',
+        'mautic_form_name' => '',
+        'mautic_email_field' => 'email',
+        'mautic_name_field' => 'nombre',
+        'mautic_phone_field' => '',
     ];
 
     $local = [];
@@ -51,6 +58,13 @@ function pontelog_config(): array
         'PONTELOG_SMTP_SECURE' => 'smtp_secure',
         'PONTELOG_MAIL_DEBUG' => 'mail_debug',
         'PONTELOG_DATA_DIR' => 'data_dir',
+        'PONTELOG_MAUTIC_ENABLED' => 'mautic_enabled',
+        'PONTELOG_MAUTIC_BASE_URL' => 'mautic_base_url',
+        'PONTELOG_MAUTIC_FORM_ID' => 'mautic_form_id',
+        'PONTELOG_MAUTIC_FORM_NAME' => 'mautic_form_name',
+        'PONTELOG_MAUTIC_EMAIL_FIELD' => 'mautic_email_field',
+        'PONTELOG_MAUTIC_NAME_FIELD' => 'mautic_name_field',
+        'PONTELOG_MAUTIC_PHONE_FIELD' => 'mautic_phone_field',
     ];
 
     foreach ($envMap as $env => $key) {
@@ -58,7 +72,7 @@ function pontelog_config(): array
         if ($value === false || $value === '') {
             continue;
         }
-        if ($key === 'mail_enabled' || $key === 'mail_debug') {
+        if ($key === 'mail_enabled' || $key === 'mail_debug' || $key === 'mautic_enabled') {
             $config[$key] = $value === '1' || strcasecmp($value, 'true') === 0;
         } elseif ($key === 'smtp_port') {
             $config[$key] = (int) $value;

@@ -8,7 +8,13 @@ $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/') . '
 if ($base === '//') $base = '/';
 function asset(string $file): string { global $base; return $base . 'assets/images/' . $file; }
 $page = $_GET['page'] ?? 'inicio';
-$allowed = ['inicio' => 'Soluciones para la seguridad alimentaria', 'invitacion-de-webinar-2026' => 'Webinar: patógenos bajo vigilancia', 'formulario-pontelog' => 'Formulario de campaña'];
+$allowed = [
+    'inicio' => 'Soluciones para la seguridad alimentaria',
+    'invitacion-de-webinar-2026' => 'Webinar: patógenos bajo vigilancia',
+    'formulario-pontelog' => 'Formulario de campaña',
+    'politica-de-privacidad' => 'Política de privacidad',
+    'politica-de-cookies' => 'Política de cookies',
+];
 if (!is_string($page) || !isset($allowed[$page])) { http_response_code(404); $page = '404'; }
 $title = $allowed[$page] ?? 'Página no encontrada';
 $site = require __DIR__ . '/content/site.php';
@@ -55,11 +61,13 @@ require __DIR__ . '/includes/header.php';
 <section id="Contactenos" class="contact-section section-space" aria-labelledby="contact-title">
   <div class="container contact-layout">
     <div class="contact-copy"><h2 id="contact-title">Contáctenos</h2><p>Escríbenos para conocer nuestras soluciones.</p><a class="contact-email" href="mailto:info@pontelog.com">info@pontelog.com <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM4 5l8 7 8-7"/></svg></a>
-      <div class="map-panel contact-map"><div id="coverage-map" aria-label="Mapa de países incluidos en el sitio original"></div><p class="map-note">Escríbenos para confirmar la atención y disponibilidad en tu país.</p></div>
+      <div class="map-panel contact-map"><div id="coverage-map" aria-label="Mapa de países incluidos en el sitio original"></div><details class="country-details"><summary>Ver países en el mapa</summary><p><?= e(implode(', ', array_map(fn($m) => rtrim($m['name'], ':'), json_decode(file_get_contents(__DIR__ . '/assets/map-markers.json'), true)))) ?>.</p></details><p class="map-note">Escríbenos para confirmar la atención y disponibilidad en tu país.</p></div>
     </div>
     <?php require __DIR__ . '/includes/contact-form.php'; ?>
   </div>
 </section>
+<?php elseif ($page === 'politica-de-privacidad'): $legal = require __DIR__ . '/content/privacy.php'; require __DIR__ . '/includes/legal-page.php'; ?>
+<?php elseif ($page === 'politica-de-cookies'): $legal = require __DIR__ . '/content/cookies.php'; require __DIR__ . '/includes/legal-page.php'; ?>
 <?php elseif ($page === '404'): ?>
 <div class="container standalone not-found"><h1>Esta página no está disponible.</h1><p>Puedes volver al inicio para consultar nuestras soluciones.</p><a class="button" href="<?= $base ?>#Soluciones">Ver soluciones</a></div>
 <?php else: require __DIR__ . '/includes/extra-page.php'; endif; ?>

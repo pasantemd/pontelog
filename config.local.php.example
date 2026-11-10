@@ -28,4 +28,13 @@ return [
     'smtp_secure' => 'tls', // tls | ssl | '' (sin cifrado)
     'mail_debug' => true, // pon false cuando el correo ya funcione
     'data_dir' => '/home/TU_USUARIO/pontelog-data',
+
+    // Boletín → Mautic (crea un formulario de suscripción publicado y pega su ID)
+    'mautic_enabled' => true,
+    'mautic_base_url' => 'https://mkt.apracom-ec.com',
+    'mautic_form_id' => 'ID_DEL_FORMULARIO',
+    'mautic_form_name' => 'alias_del_formulario',
+    'mautic_email_field' => 'email',
+    'mautic_name_field' => 'nombre',
+    'mautic_phone_field' => '', // opcional, alias del campo teléfono en Mautic
 ];

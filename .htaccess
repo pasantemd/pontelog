@@ -3,7 +3,10 @@ DirectoryIndex index.php
 RewriteEngine On
 RewriteRule ^\.git(?:/|$) - [F,L]
 RewriteRule ^(includes|content)/ - [F,L]
-RewriteRule ^(invitacion-de-webinar-2026|formulario-pontelog)/?$ index.php?page=$1 [L,QSA]
-<FilesMatch "\.md$">
+RewriteRule ^(invitacion-de-webinar-2026|formulario-pontelog|politica-de-privacidad|politica-de-cookies)/?$ index.php?page=$1 [L,QSA]
+<FilesMatch "\.(md)$">
 Require all denied
 </FilesMatch>
+<Files "config.local.php">
+Require all denied
+</Files>

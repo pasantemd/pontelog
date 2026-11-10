@@ -11,6 +11,6 @@
   <?php endforeach; ?>
   <div class="field field-message"><label for="message">Comentario o mensaje</label><textarea id="message" name="message" rows="4" maxlength="5000" placeholder="¿Qué necesitas analizar o controlar?"><?= e((string)($contact['values']['message'] ?? '')) ?></textarea><?php if(isset($contact['errors']['message'])): ?><p class="field-error"><?= e($contact['errors']['message']) ?></p><?php endif; ?></div>
   </div>
-  <label class="newsletter"><input type="checkbox" name="newsletter" value="1" <?= !empty($contact['values']['newsletter']) ? 'checked' : '' ?>><span>Quiero suscribirme al boletín de Pontelog.</span></label>
+  <label class="newsletter"><input type="checkbox" name="newsletter" value="1" <?= !empty($contact['values']['newsletter']) ? 'checked' : '' ?>><span>Quiero suscribirme al boletín de Pontelog. He leído la <a href="<?= $base ?>politica-de-privacidad/">política de privacidad</a> y acepto el tratamiento de mis datos para ese fin.</span></label>
   <div class="form-submit"><button class="button submit" type="submit">Enviar consulta <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button><span>Los campos con * son obligatorios.</span></div>
 </form>

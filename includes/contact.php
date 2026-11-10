@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/mail.php';
+require_once __DIR__ . '/mautic.php';
 
 function csrf_token(array &$session): string
 {
@@ -83,6 +84,7 @@ function handle_contact(array $post, array &$session): array
     $session['contact_last_sent'] = time();
 
     $mailResult = send_contact_mail($values, $config);
+    $mauticResult = subscribe_mautic_newsletter($values, $config);
     $result['status'] = 'success';
     if ($mailResult['ok']) {
         $result['message'] = 'Tu consulta se guardó y se envió por correo.';
@@ -90,6 +92,15 @@ function handle_contact(array $post, array &$session): array
         $result['message'] = 'Tu consulta se guardó en este sitio. El envío de correo no está disponible; para contacto directo escribe a info@pontelog.com.';
         if (!empty($config['mail_debug']) && $mailResult['error'] !== '') {
             $result['message'] .= ' [DEBUG correo: ' . $mailResult['error'] . ']';
+        }
+    }
+    if ($values['newsletter']) {
+        if ($mauticResult['ok'] && !$mauticResult['skipped']) {
+            $result['message'] .= ' También registramos tu suscripción al boletín.';
+        } elseif (!$mauticResult['skipped'] || $mauticResult['error'] !== '') {
+            if (!empty($config['mail_debug']) && $mauticResult['error'] !== '') {
+                $result['message'] .= ' [DEBUG boletín: ' . $mauticResult['error'] . ']';
+            }
         }
     }
     $result['values'] = ['name' => '', 'email' => '', 'phone' => '', 'message' => '', 'newsletter' => false];

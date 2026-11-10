@@ -21,7 +21,7 @@ Rutas adicionales conservadas:
 - `content/site.php`: identificadores, textos y logotipos de las soluciones, empresa, misión y visión.
 - `content/form-3.html` y `content/form-13.html`: campos originales de campaña y webinar.
 - `assets/site.css`, `assets/forms.css` y `assets/site.js`: presentación e interacciones.
-- `assets/images/`, `assets/fonts/` y `assets/vendor/jsvectormap/`: recursos locales utilizados.
+- `assets/images/`, `assets/fonts/` y `assets/vendor/leaflet/`: recursos locales utilizados.
 - `assets/map-markers.json`: coordenadas del mapa original.
 
 ## Contacto y correo
@@ -59,6 +59,34 @@ También puedes usar variables de entorno (`PONTELOG_MAIL_ENABLED`, `PONTELOG_SM
 
 Si el SMTP no está configurado o falla, la consulta igual se guarda en disco y el mensaje al visitante indica contacto directo a `info@pontelog.com`.
 
+### Boletín con Mautic
+
+Si el visitante marca el boletín, el sitio envía esos datos a un formulario publicado de Mautic (`/form/submit`).
+
+1. En Mautic crea un formulario de suscripción (email obligatorio; nombre/teléfono opcionales).
+2. Publica el formulario y copia su **ID** y alias.
+3. En `config.local.php` activa:
+
+```php
+'mautic_enabled' => true,
+'mautic_base_url' => 'https://mkt.apracom-ec.com',
+'mautic_form_id' => '14',
+'mautic_form_name' => 'boletinpontelog',
+'mautic_email_field' => 'email',
+'mautic_name_field' => 'nombre',
+```
+
+Los alias `mautic_*_field` deben coincidir con los alias de campos del formulario en Mautic. Errores en `/home/.../pontelog-data/mautic-errors.log`.
+
+### Privacidad y cookies
+
+Rutas:
+
+- `/politica-de-privacidad/`
+- `/politica-de-cookies/`
+
+Hay un banner de consentimiento (aceptar / solo necesarias). El texto es una plantilla multi-país alineada a principios GDPR/LGPD/LOPDP; conviene validarlo con asesoría legal.
+
 Los formularios de campaña y webinar mantienen el destino HTTPS original en `mkt.apracom-ec.com`. Las cantidades aparecen al seleccionar una placa y «Describa» al elegir «Otros». Las fechas de las campañas se conservan como fueron publicadas; no representan disponibilidad actual verificada.
 
-El mapa vectorial de América se sirve localmente con jsVectorMap y conserva los 17 marcadores originales y controles de zoom. Está visible junto al formulario, sin afirmar oficinas ni cobertura comercial.
+Leaflet se sirve localmente; las teselas de OpenStreetMap necesitan Internet. El mapa está visible junto al formulario y conserva una lista alternativa de países, sin afirmar oficinas ni cobertura comercial.

@@ -27,7 +27,7 @@ button { cursor: pointer; }
 button:disabled { cursor: wait; }
 img { max-width: 100%; }
 h1, h2, h3, p, a, label { overflow-wrap: anywhere; }
-svg { flex-shrink: 0; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+svg:not(.leaflet-zoom-animated) { flex-shrink: 0; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
 ::selection { color: #fff; background: var(--blue); }
 input, textarea { caret-color: var(--blue); }
@@ -74,9 +74,9 @@ input::placeholder, textarea::placeholder { color: #555; opacity: 1; }
 .is-flipped .flip-inner { transform: rotateY(180deg); }
 .flip-front, .flip-back { grid-area: 1 / 1; width: 100%; min-width: 0; border: 0; border-radius: 24px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .flip-front { display: grid; place-items: center; padding: 28px; background: #fff; }
-.flip-front img { display: block; width: 100%; height: 260px; object-fit: contain; object-position: center; }
+.flip-front img { width: 100%; height: 260px; object-fit: contain; }
 .flip-back { transform: rotateY(180deg); padding: 28px; background: transparent; color: #111; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.flip-back p { width: 100%; font-size: 17px; line-height: 1.5; text-align: center; margin-bottom: 22px; }
+.flip-back p { font-size: 17px; line-height: 1.5; margin-bottom: 22px; }
 .flip-back .button { background: var(--blue); color: #fff; min-height: 44px; padding: 10px 18px; align-self: center; }
 .flip-back :focus-visible { outline-color: var(--focus); }
 .contact-map { margin-top: 30px; }
@@ -146,15 +146,14 @@ input::placeholder, textarea::placeholder { color: #555; opacity: 1; }
 .contact-email { display: inline-flex; align-items: center; gap: 20px; max-width: 100%; min-height: 44px; color: #fff; font-size: 25px; text-decoration: none; margin-bottom: 34px; }
 .contact-email:hover { text-decoration: underline; }
 .map-panel { color: var(--ink); border-radius: 8px; overflow: hidden; background: #fff; }
-#coverage-map { position: relative; height: 440px; width: 100%; background: #f5f5f5; }
+#coverage-map { height: 330px; width: 100%; background: #eee; }
 #coverage-map.map-unavailable { padding: 24px; font-size: 16px; }
-#coverage-map svg { width: 100%; height: 100%; stroke: none; fill: none; }
-#coverage-map .jvm-zoom-btn { display: grid; place-items: center; width: 44px; height: 44px; left: 12px; border: 1px solid #ccc; border-radius: 6px; background: #fff; color: #111; font-size: 24px; line-height: 1; }
-#coverage-map .jvm-zoomin { top: 12px; }
-#coverage-map .jvm-zoomout { top: 64px; }
-#coverage-map .jvm-zoom-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-body .jvm-tooltip { padding: 8px 12px; border-radius: 4px; background: #111; color: #fff; font: 600 14px/1.4 'Source Sans Pro', sans-serif; }
-.map-note { margin: 0; padding: 18px; color: var(--muted); font-size: 14px; }
+#coverage-map .leaflet-overlay-pane svg { width: auto; height: auto; stroke: none; fill: none; }
+.country-details { padding: 12px 18px; font-size: 14px; }
+.country-details summary { min-height: 44px; padding-top: 9px; cursor: pointer; font-weight: 600; }
+.country-details p { color: var(--muted); line-height: 1.6; margin-block: 12px; }
+.map-note { margin: 0; padding: 0 18px 18px; color: var(--muted); font-size: 14px; }
+.leaflet-container { font-family: 'Source Sans Pro', sans-serif !important; }
 .contact-form { min-width: 0; padding: 38px; border-radius: var(--radius); background: #fff; color: var(--ink); }
 .contact-form h3 { margin-bottom: 10px; font-size: 27px; line-height: 1.3; letter-spacing: -0.025em; }
 .form-intro { margin-bottom: 28px; font-size: 17px; color: var(--muted); }
@@ -304,7 +303,7 @@ body .jvm-tooltip { padding: 8px 12px; border-radius: 4px; background: #111; col
   .form-submit { flex-wrap: wrap; gap: 14px; }
   .form-submit .button { width: 100%; }
   .form-submit > span { width: 100%; text-align: center; }
-  #coverage-map { height: 360px; }
+  #coverage-map { height: 300px; }
   .site-footer { padding-top: 38px; }
   .footer-main { padding-bottom: 30px; }
   .footer-nav { gap: 0; }
@@ -320,6 +319,33 @@ body .jvm-tooltip { padding: 8px 12px; border-radius: 4px; background: #111; col
   .hero-actions { gap: 8px; }
   .hero-actions .text-link { padding-inline: 2px; }
   .contact-email { font-size: 21px; }
+}
+
+.legal-page { padding-block: 56px 80px; max-width: 760px; }
+.legal-page h1 { margin: 0 0 12px; font: 800 42px/1.15 Raleway, sans-serif; }
+.legal-updated { margin: 0 0 32px; color: var(--muted); font-size: 15px; }
+.legal-section { margin-bottom: 28px; }
+.legal-section h2 { margin: 0 0 10px; font: 700 22px/1.3 Raleway, sans-serif; }
+.legal-section p { margin: 0 0 10px; color: var(--muted); font-size: 17px; }
+.newsletter a { color: inherit; text-underline-offset: 3px; }
+.cookie-banner { position: fixed; inset: auto 16px 16px 16px; z-index: 80; }
+.cookie-banner-inner { display: flex; gap: 20px; align-items: center; justify-content: space-between; max-width: 980px; margin: 0 auto; padding: 18px 20px; border: 1px solid #222; background: #111; color: #fff; box-shadow: 0 12px 40px rgba(0,0,0,.28); }
+.cookie-copy { min-width: 0; }
+.cookie-copy p { margin: 0; font-size: 15px; line-height: 1.45; color: #ddd; }
+.cookie-copy p + p { margin-top: 6px; }
+.cookie-copy strong { color: #fff; font-family: Raleway, sans-serif; }
+.cookie-copy a { color: #fff; }
+.cookie-actions { display: flex; flex-shrink: 0; gap: 10px; }
+.cookie-actions .button { min-height: 44px; padding: 10px 16px; background: #fff; color: #111; }
+.cookie-actions .button:hover { background: #ddd; }
+.cookie-actions .button-ghost { background: transparent; color: #fff; border-color: #666; }
+.cookie-actions .button-ghost:hover { background: #222; }
+
+@media (max-width: 760px) {
+  .cookie-banner-inner { flex-direction: column; align-items: stretch; }
+  .cookie-actions { flex-direction: column; }
+  .cookie-actions .button { width: 100%; }
+  .legal-page h1 { font-size: 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
